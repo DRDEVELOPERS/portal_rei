@@ -40,3 +40,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 loja virtual do portal
 >>>>>>> b60c9e65ed1cf345f018650114d6a8640fc90f34
 # portal_rei
+# portal_rei
