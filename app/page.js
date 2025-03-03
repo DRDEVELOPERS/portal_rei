@@ -27,7 +27,7 @@ export default function Home() {
           </div>
           <div className="flex-1">
             <Image
-              src="/images/home/seasonal-promo.png"
+              src="/images/home/seasonal-promo_b2.png"
               alt="Workshop Tools"
               width={600}
               height={400}
