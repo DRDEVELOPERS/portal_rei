@@ -4,10 +4,12 @@
 import { useEffect, useState } from "react";
 import MainLayout from "./layouts/MainLayout";
 import Image from "next/image";
+import TopHeader from "./layouts/includes/TopHeader";
 
 export default function Home() {
   return (
     <MainLayout>
+      <TopHeader />
       {/* Seasonal Promotion Section */}
       <section className="mx-auto max-w-7xl px-4 py-12">
         <div className="bg-primary-yellow rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8">
