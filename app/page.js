@@ -8,13 +8,70 @@ import Image from "next/image";
 import MainLayout from "./layouts/MainLayout";
 import TopHeader from "./layouts/includes/TopHeader";
 import CarouselComp from "./components/CarouselComp";
+import { ThreeItemGrid } from "./components/grid/three-items";
+import { Grid, GridItem } from "./components/grid";
+import { GridTileImage } from "./components/grid/tile";
+
+import useIsLoading from "@/app/hooks/useIsLoading";
+import Product from "./components/Product";
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    useIsLoading(true);
+    try {
+      const response = await fetch("/api/products");
+      const prods = await response.json();
+      setProducts(prods);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      useIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <MainLayout>
       <div className="mt-12">
         <CarouselComp />
         <TopHeader />
+
+        {/* Featured Products Section */}
+
+        <section className="mx-auto max-w-7xl px-4 py-12">
+          <h2 className="text-3xl font-bold text-primary-white mb-8">
+            Itens em Ofertas agora!
+          </h2>
+
+          {/* Main Featured Grid */}
+          <ThreeItemGrid products={products.slice(0, 3)} />
+
+          {/* Secondary Grid */}
+          <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {products.slice(3).map((product) => (
+              <div key={product.id} className="aspect-square">
+                <GridTileImage
+                  // src={product.url}
+                  src={`${product.url}/500`}
+                  fill={true}
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                  alt={product.title}
+                  label={{
+                    title: product.title,
+                    amount: (product.price / 100).toFixed(2),
+                    position: "bottom",
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Seasonal Promotion Section */}
         <section className="mx-auto max-w-7xl px-4 py-12">
           <div className="bg-primary-yellow rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8">
