@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "dependencies": {
+    "@prisma/client": "^6.4.1",
     "@tailwindcss/typography": "^0.5.16",
     "animate.css": "^4.1.1",
     "debounce": "^2.2.0",
@@ -23,6 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "prisma": "^6.4.1",
     "tailwindcss": "^4"
   }
 }
