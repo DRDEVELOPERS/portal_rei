@@ -15,6 +15,8 @@ export async function GET() {
   } catch (error) {
     console.log(error);
     await prisma.$disconnect();
-    return new NextResponse("Something went wrong", { status: 400 });
+    return new NextResponse("Opps. Tem algo de estanho ocorrendo aqui...", {
+      status: 400,
+    });
   }
 }
