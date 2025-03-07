@@ -44,9 +44,25 @@ export default function Home() {
         {/* Featured Products Section */}
 
         <section className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="text-3xl font-bold text-primary-white mb-8">
-            Itens em Ofertas agora!
-          </h2>
+          <div className="text-justify space-y-3 group">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4 bg-gradient-to-br from-blue-500 via-sky-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-md">
+              <span className="inline-block animate-float will-change-transform">
+                Flash Deals
+              </span>
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium transition-colors hover:text-sky-500">
+              Itens em Ofertas{" "}
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 underline decoration-2 decoration-dotted underline-offset-4 hover:decoration-wavy hover:text-amber-500 hover:decoration-amber-400 transition-all duration-200"
+              >
+                <span className="relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-amber-400 after:transition-all after:duration-300 hover:after:w-full">
+                  Aproveite nossas promoções
+                </span>
+              </a>
+            </p>
+            <p></p>
+          </div>
 
           {/* Main Featured Grid */}
           <ThreeItemGrid products={products.slice(0, 3)} />
@@ -140,11 +156,9 @@ export default function Home() {
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-primary-black/80">
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Professional Workshop Setups
+                  Franquias
                 </h3>
-                <p className="text-gray-200">
-                  Explore ideal configurations for various spaces
-                </p>
+                <p className="text-gray-200">Seja um franqueado</p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -162,7 +176,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <button className="text-white font-medium px-6 py-2 border-2 border-white rounded-full hover:bg-white/10">
-                      View Ideas
+                      Ver Franquias
                     </button>
                   </div>
                 </div>

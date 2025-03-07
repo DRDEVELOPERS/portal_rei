@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Buy Section */}
           <div className="space-y-3">
             <h3 className="font-semibold text-primary-black dark:text-primary-yellow text-lg mb-2">
-              Comprar
+              Compras
             </h3>
             <ul className="space-y-2">
               {[
@@ -32,13 +32,14 @@ export default function Footer() {
           {/* Sell Section */}
           <div className="space-y-3">
             <h3 className="font-semibold text-primary-black dark:text-primary-yellow text-lg mb-2">
-              Empresas
+              Franquias
             </h3>
             <ul className="space-y-2">
               {[
-                "Compras Direta",
-                "Buscar Profissionais",
-                "Política para Empresas",
+                "Seja um Franqueado",
+                "Formulário de Proposta",
+                "Como Funciona?",
+                "Seja um Fornecedor",
               ].map((item) => (
                 <li key={item}>
                   <a
@@ -58,7 +59,7 @@ export default function Footer() {
               Sobre a Portal
             </h3>
             <ul className="space-y-2">
-              {["Conheça", "Novidades", "Loja Dísica", "Careers"].map(
+              {["Conheça", "Novidades", "Nosa Empresa", "Trabalhe Conosco"].map(
                 (item) => (
                   <li key={item}>
                     <a
