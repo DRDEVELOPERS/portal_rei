@@ -19,7 +19,8 @@ export default function AddressPage() {
   // Changed from Home to AddressPage
   const router = useRouter();
   const supabase = createClient();
-  const { user } = useUser();
+  const userContext = useUser(); // Get the entire context object
+  const user = userContext?.user; // Safely access user
 
   // Add loading state for initial user check
   const [isLoadingUser, setIsLoadingUser] = useState(true);
@@ -40,9 +41,6 @@ export default function AddressPage() {
   // Add client-side user verification
   useEffect(() => {
     const verifyUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
       if (!user) {
         router.push("/login");
         return;
@@ -50,8 +48,9 @@ export default function AddressPage() {
       setIsLoadingUser(false);
     };
     verifyUser();
-  }, [supabase, router]);
+  }, [user, router]);
 
+  // Update your getAddress function
   const getAddress = async () => {
     if (!user?.id) {
       useIsLoading(false);

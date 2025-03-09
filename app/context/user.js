@@ -5,13 +5,30 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
-const Context = createContext();
+const UserContext = createContext(undefined); // Initialize with undefined
+
+const Context = createContext({
+  user: null, // Add default values
+  id: null,
+  email: null,
+  name: null,
+  picture: null,
+  signOut: () => {},
+});
 
 export const UserProvider = ({ children }) => {
   const router = useRouter();
   const supabase = createClient();
 
-  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  // const [user, setUser] = useState(null);
+  const [userState, setUserState] = useState({
+    user: null,
+    id: null,
+    email: null,
+    name: null,
+    picture: null,
+  });
   const [id, setId] = useState(null);
   const [email, setEmail] = useState(null);
   const [name, setName] = useState(null);
@@ -67,7 +84,13 @@ export const UserProvider = ({ children }) => {
 
   const exposed = { user, id, email, name, picture, signOut };
 
-  return <Context.Provider value={exposed}>{children}</Context.Provider>;
+  // return <Context.Provider value={exposed}>{children}</Context.Provider>;
+
+  return (
+    <UserContext.Provider value={{ ...userState, loading, signOut }}>
+      {!loading && children}
+    </UserContext.Provider>
+  );
 };
 
 export const useUser = () => useContext(Context);

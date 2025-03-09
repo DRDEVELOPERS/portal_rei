@@ -12,7 +12,7 @@ import { ThreeItemGrid } from "./components/grid/three-items";
 import { Grid, GridItem } from "./components/grid";
 import { GridTileImage } from "./components/grid/tile";
 
-import useIsLoading from "@/app/hooks/useIsLoading";
+import useIsLoading from "./hooks/useIsLoading";
 import Product from "./components/Product";
 
 export default function Home() {
