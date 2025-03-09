@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",
+    "@supabase/ssr": "^0.5.2",
     "@tailwindcss/typography": "^0.5.16",
     "animate.css": "^4.1.1",
     "debounce": "^2.2.0",

@@ -184,6 +184,40 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Category Showcase Section */}
+        <section className="mx-auto max-w-7xl px-4 py-12">
+          <h2 className="text-3xl font-bold text-primary-black dark:text-gray-200 mb-8">
+            Itens em Ofertas agora!
+          </h2>
+
+          {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-2">
+            {products.length > 0 && (
+              <>
+                <Product product={products[0]} size="full" priority={true} />
+                {products.slice(1, 12).map((product, index) => (
+                  <Product
+                    key={product.id}
+                    product={product}
+                    size="half"
+                    priority={index === 0}
+                  />
+                ))}
+              </>
+            )}
+          </div> */}
+
+          {/* Secondary Grid */}
+          <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {products.slice(3).map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                className="hover:scale-[1.02] transition-transform duration-200"
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </MainLayout>
   );
