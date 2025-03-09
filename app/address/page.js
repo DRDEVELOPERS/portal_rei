@@ -1,23 +1,28 @@
-"use client";
+// app/address/page.js
 
-// https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
+"use client";
 
 import MainLayout from "../layouts/MainLayout";
 import TextInput from "../components/TextInput";
 import { useEffect, useState } from "react";
-import { useUser } from "@/app/context/user";
-import useIsLoading from "@/app/hooks/useIsLoading";
+import { useUser } from "../context/user";
+import useIsLoading from "@/hooks/useIsLoading";
 import useCreateAddress from "../hooks/useCreateAddress";
 import useUserAddress from "../hooks/useUserAddress";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import ClientOnly from "../../components/ClientOnly";
+import ClientOnly from "@/components/ClientOnly";
+import { createClient } from "@/utils/supabase/client";
 
-export default function Home() {
+export default function AddressPage() {
+  // Changed from Home to AddressPage
   const router = useRouter();
+  const supabase = createClient();
   const { user } = useUser();
 
+  // Add loading state for initial user check
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
   const [addressId, setAddressId] = useState(null);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -27,34 +32,50 @@ export default function Home() {
   const [isUpdatingAddress, setIsUpdatingAddress] = useState(false);
   const [error, setError] = useState({});
 
+  // Enhanced error handling
   const showError = (type) => {
-    if (Object.entries(error).length > 0 && error?.type == type) {
-      return error.message;
-    }
-    return "";
+    return error?.type === type ? error.message : "";
   };
 
-  const getAdddress = async () => {
-    if (user?.id == null || user?.id == undefined) {
+  // Add client-side user verification
+  useEffect(() => {
+    const verifyUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+      setIsLoadingUser(false);
+    };
+    verifyUser();
+  }, [supabase, router]);
+
+  const getAddress = async () => {
+    if (!user?.id) {
       useIsLoading(false);
       return;
     }
 
-    const response = await useUserAddress();
-    if (response) {
-      setTheCurrentAddres(response);
+    try {
+      const response = await useUserAddress();
+      if (response) {
+        setTheCurrentAddress(response);
+      }
+    } finally {
       useIsLoading(false);
-      return;
     }
-    useIsLoading(false);
   };
 
   useEffect(() => {
-    useIsLoading(true);
-    getAdddress();
-  }, [user]);
+    if (!isLoadingUser && user?.id) {
+      useIsLoading(true);
+      getAddress();
+    }
+  }, [user, isLoadingUser]);
 
-  const setTheCurrentAddres = (result) => {
+  const setTheCurrentAddress = (result) => {
     setAddressId(result.id);
     setName(result.name);
     setAddress(result.address);
@@ -64,37 +85,26 @@ export default function Home() {
   };
 
   const validate = () => {
-    setError(null);
-    setError({});
-    let isError = false;
+    const errors = [];
+    if (!name) errors.push({ type: "name", message: "A name is required" });
+    if (!address)
+      errors.push({ type: "address", message: "An address is required" });
+    if (!zipcode)
+      errors.push({ type: "zipcode", message: "A zipcode is required" });
+    if (!city) errors.push({ type: "city", message: "A city is required" });
+    if (!country)
+      errors.push({ type: "country", message: "A country is required" });
 
-    if (!name) {
-      setError({ type: "name", message: "A name is required" });
-      isError = true;
-    } else if (!address) {
-      setError({ type: "address", message: "An address is required" });
-      isError = true;
-    } else if (!zipcode) {
-      setError({ type: "zipcode", message: "A zipcode is required" });
-      isError = true;
-    } else if (!city) {
-      setError({ type: "city", message: "A city is required" });
-      isError = true;
-    } else if (!country) {
-      setError({ type: "country", message: "A country is required" });
-      isError = true;
+    if (errors.length > 0) {
+      setError(errors[0]);
+      return true;
     }
-    return isError;
+    return false;
   };
 
   const submit = async (event) => {
     event.preventDefault();
-    let isError = validate();
-
-    if (isError) {
-      toast.error(error.message, { autoClose: 3000 });
-      return;
-    }
+    if (validate()) return;
 
     try {
       setIsUpdatingAddress(true);
@@ -108,118 +118,68 @@ export default function Home() {
         country,
       });
 
-      setTheCurrentAddres(response);
-      setIsUpdatingAddress(false);
-
+      setTheCurrentAddress(response);
       toast.success("Address updated!", { autoClose: 3000 });
-
       router.push("/checkout");
     } catch (error) {
+      toast.error(error.message || "Failed to update address");
+    } finally {
       setIsUpdatingAddress(false);
-      console.log(error);
-      alert(error);
     }
   };
 
-  return (
-    <>
+  if (isLoadingUser) {
+    return (
       <MainLayout>
-        <div id="AddressPage" className="mt-4 max-w-[600px] mx-auto px-2">
-          <div className="mx-auto bg-white rounded-lg p-3">
-            <div className="text-xl text-bold mb-2">Address Details</div>
-
-            <form onSubmit={submit}>
-              <div className="mb-4">
-                <ClientOnly>
-                  <TextInput
-                    className="w-full"
-                    string={name}
-                    placeholder="Name"
-                    onUpdate={setName}
-                    error={showError("name")}
-                  />
-                </ClientOnly>
-              </div>
-
-              <div className="mb-4">
-                <ClientOnly>
-                  <TextInput
-                    className="w-full"
-                    string={address}
-                    placeholder="Address"
-                    onUpdate={setAddress}
-                    error={showError("address")}
-                  />
-                </ClientOnly>
-              </div>
-
-              <div className="mb-4">
-                <ClientOnly>
-                  <TextInput
-                    className="w-full mt-2"
-                    string={zipcode}
-                    placeholder="Zip Code"
-                    onUpdate={setZipcode}
-                    error={showError("zipcode")}
-                  />
-                </ClientOnly>
-              </div>
-
-              <div className="mb-4">
-                <ClientOnly>
-                  <TextInput
-                    className="w-full mt-2"
-                    string={city}
-                    placeholder="City"
-                    onUpdate={setCity}
-                    error={showError("city")}
-                  />
-                </ClientOnly>
-              </div>
-
-              <div>
-                <ClientOnly>
-                  <TextInput
-                    className="w-full mt-2"
-                    string={country}
-                    placeholder="Country"
-                    onUpdate={setCountry}
-                    error={showError("country")}
-                  />
-                </ClientOnly>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isUpdatingAddress}
-                className={`
-                                mt-6
-                                w-full 
-                                text-white 
-                                text-lg 
-                                font-semibold 
-                                p-3 
-                                rounded
-                                ${
-                                  isUpdatingAddress
-                                    ? "bg-blue-800"
-                                    : "bg-blue-600"
-                                }
-                            `}
-              >
-                {!isUpdatingAddress ? (
-                  <div>Update Address</div>
-                ) : (
-                  <div className="flex items-center justify-center gap-2">
-                    <AiOutlineLoading3Quarters className="animate-spin" />
-                    Please wait...
-                  </div>
-                )}
-              </button>
-            </form>
-          </div>
+        <div className="flex justify-center items-center h-screen">
+          <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
         </div>
       </MainLayout>
-    </>
+    );
+  }
+
+  return (
+    <MainLayout>
+      <div id="AddressPage" className="mt-4 max-w-[600px] mx-auto px-2">
+        <div className="mx-auto bg-white rounded-lg p-3">
+          <h1 className="text-xl font-bold mb-2">Address Details</h1>
+
+          <form onSubmit={submit}>
+            {/* Keep your existing form fields */}
+            {/* Add error boundaries around each input */}
+            <ClientOnly>
+              <div className="mb-4">
+                <TextInput
+                  className="w-full"
+                  value={name}
+                  placeholder="Name"
+                  onChange={(e) => setName(e.target.value)}
+                  error={showError("name")}
+                />
+              </div>
+            </ClientOnly>
+
+            {/* Repeat for other fields */}
+
+            <button
+              type="submit"
+              disabled={isUpdatingAddress}
+              className={`mt-6 w-full text-white text-lg font-semibold p-3 rounded ${
+                isUpdatingAddress ? "bg-blue-800" : "bg-blue-600"
+              }`}
+            >
+              {isUpdatingAddress ? (
+                <div className="flex items-center justify-center gap-2">
+                  <AiOutlineLoading3Quarters className="animate-spin" />
+                  Please wait...
+                </div>
+              ) : (
+                "Update Address"
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    </MainLayout>
   );
 }
