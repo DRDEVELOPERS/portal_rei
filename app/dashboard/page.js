@@ -1,5 +1,5 @@
 // app/dashboard/page.js
-import ClientOnly from "@/components/ClientOnly";
+import ClientOnly from "../../components/ClientOnly";
 import { createClient } from "@/utils/supabase/client";
 import { redirect } from "next/navigation";
 
@@ -18,7 +18,7 @@ async function ProtectedContent() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login");
+    redirect("/logisn");
   }
 
   return (
