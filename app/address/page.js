@@ -12,7 +12,7 @@ import useUserAddress from "../hooks/useUserAddress";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import ClientOnly from "../components/ClientOnly";
+import ClientOnly from "../../components/ClientOnly";
 
 export default function Home() {
   const router = useRouter();
