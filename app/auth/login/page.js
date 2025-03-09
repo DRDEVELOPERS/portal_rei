@@ -1,4 +1,4 @@
-// app/login/page.js
+// app/auth/login/page.js
 "use client";
 import ClientOnly from "@/components/ClientOnly";
 import { createClient } from "@/utils/supabase/client";
