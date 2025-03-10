@@ -38,6 +38,135 @@ export default function Home() {
   return (
     <MainLayout>
       <div className="mt-12">
+        {/* Hero Section */}
+        <section className="relative h-[600px] w-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-black/90 to-transparent z-10" />
+          <Image
+            src="/images/hero-tools.jpg"
+            alt="Ferramentas profissionais"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="relative z-20 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="max-w-2xl space-y-6">
+                <h1 className="text-6xl font-black text-primary-yellow drop-shadow-xl">
+                  Ferramentas Profissionais
+                  <span className="block text-4xl text-white mt-2">
+                    Para quem entende de trabalho sério
+                  </span>
+                </h1>
+                <button className="bg-primary-yellow text-primary-black px-8 py-4 rounded-full text-lg font-bold hover:bg-[#f8d634] transition-colors">
+                  Ver Ofertas
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Categories Grid */}
+        <section className="mx-auto max-w-7xl px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              "Ferramentas Elétricas",
+              "Equipamentos de Segurança",
+              "Acessórios",
+            ].map((category, index) => (
+              <div
+                key={index}
+                className="relative group overflow-hidden rounded-2xl aspect-video"
+              >
+                <Image
+                  src={`/images/category-${index + 1}.jpg`}
+                  alt={category}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-black/80 via-transparent to-transparent" />
+                <h3 className="absolute bottom-6 left-6 text-2xl font-bold text-white">
+                  {category}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Promo Banner */}
+        <div className="bg-primary-black py-8">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-primary-yellow space-y-2">
+              <h3 className="text-3xl font-bold">Black Friday Tools</h3>
+              <p className="text-gray-300">
+                Até 70% de desconto nas melhores marcas
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-primary-yellow">02</div>
+                <div className="text-gray-300 text-sm">Dias</div>
+              </div>
+              <div className="text-4xl text-primary-yellow">:</div>
+              {/* Add more countdown elements */}
+            </div>
+          </div>
+        </div>
+
+        {/* Featured Products Grid */}
+        <section className="mx-auto max-w-7xl px-4 py-16">
+          <h2 className="text-4xl font-bold text-primary-black dark:text-gray-200 mb-12">
+            Mais Vendidos
+          </h2>
+
+          <div className="product-grid">
+            {products.slice(0, 6).map((product, index) => (
+              <div
+                key={product.id}
+                className={`product-tile ${
+                  index === 0 ? "md:col-span-4 md:row-span-2" : "md:col-span-2"
+                }`}
+              >
+                <GridTileImage
+                  src={`${product.url}/800`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt={product.title}
+                  label={{
+                    title: product.title,
+                    amount: (product.price / 100).toFixed(2),
+                    currencyCode: "BRL",
+                  }}
+                />
+                {index === 0 && <div className="discount-badge">50% OFF</div>}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Brand Showcase */}
+        <section className="bg-gray-100 dark:bg-gray-900 py-16">
+          <div className="max-w-7xl mx-auto px-4">
+            <h3 className="text-2xl font-bold text-center text-primary-black dark:text-gray-300 mb-8">
+              Marcas Parceiras
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
+                >
+                  <Image
+                    src={`/images/brand-${item}.png`}
+                    alt="Marca"
+                    width={120}
+                    height={60}
+                    className="object-contain grayscale hover:grayscale-0 transition-all"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         <CarouselComp />
         <TopHeader />
 
