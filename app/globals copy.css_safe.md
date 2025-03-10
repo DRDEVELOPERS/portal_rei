@@ -1,6 +1,5 @@
 /* file: app/global.css */
 @import "tailwindcss";
-@import "animate.css";
 
 @plugin "@tailwindcss/typography";
 
@@ -17,16 +16,6 @@
   --foreground: #171717;
   --primary-black: #373841;
   --primary-yellow: #FDE037;
-  /* Animation durations */
-  --animate-duration: 0.5s;
-  --animate-delay: 0.1s;
-}
-
-/* Add custom animations */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-20px); }
-  60% { transform: translateY(-10px); }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,19 +34,6 @@ body {
 }
 
 @layer components {
-  /* Add these animation classes */
-  .animate-bounce {
-    animation: bounce 1s infinite;
-  }
-  
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .animate-pulse-fast {
-    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
   .nav-hover {
     @apply transition-colors duration-200 hover:text-primary-yellow;
   }
@@ -88,16 +64,4 @@ body {
   .price-label {
     @apply text-primary-yellow font-semibold text-lg;
   }
-  
-}
-/* Add keyframes for custom animations */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes pulse-fast {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 }
