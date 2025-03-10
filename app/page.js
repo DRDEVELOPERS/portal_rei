@@ -156,7 +156,7 @@ export default function Home() {
                   className="flex items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
                 >
                   <Image
-                    src={`/images/brand-${item}.png`}
+                    src={`/images/brand-${item}.jpg`}
                     alt="Marca"
                     width={120}
                     height={60}
