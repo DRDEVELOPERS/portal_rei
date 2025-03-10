@@ -4,6 +4,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/user";
+import CartProvider from "./context/cart";
 
 export const metadata = {
   title: "Portal Ferragem",
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
       <body>
         <ToastContainer />
         <div>
-          <UserProvider>{children}</UserProvider>
+          <UserProvider>
+            <CartProvider>{children}</CartProvider>
+          </UserProvider>
         </div>
       </body>
     </html>
