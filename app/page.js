@@ -96,7 +96,7 @@ export default function Home() {
         <div className="bg-primary-black py-8">
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-primary-yellow space-y-2">
-              <h3 className="text-3xl font-bold">Black Friday Tools</h3>
+              <h3 className="text-3xl font-bold">Semana do Consumidor</h3>
               <p className="text-gray-300">
                 Até 70% de desconto nas melhores marcas
               </p>
@@ -114,8 +114,9 @@ export default function Home() {
 
         {/* Featured Products Grid */}
         <section className="mx-auto max-w-7xl px-4 py-16">
-          <h2 className="text-4xl font-bold text-primary-black dark:text-gray-200 mb-12">
+          <h2 className="text-4xl font-extrabold text-primary-black dark:text-gray-100 mb-12">
             Mais Vendidos
+            <span className="text-primary-yellow">.</span>
           </h2>
 
           <div className="product-grid">
@@ -146,8 +147,9 @@ export default function Home() {
         {/* Brand Showcase */}
         <section className="bg-gray-100 dark:bg-gray-900 py-16">
           <div className="max-w-7xl mx-auto px-4">
-            <h3 className="text-2xl font-bold text-center text-primary-black dark:text-gray-300 mb-8">
+            <h3 className="text-3xl font-bold text-center text-primary-black dark:text-gray-300 mb-8">
               Marcas Parceiras
+              <span className="text-primary-yellow">.</span>
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
               {[1, 2, 3, 4, 5].map((item) => (
@@ -271,8 +273,9 @@ export default function Home() {
 
         {/* Inspiration Gallery Section */}
         <section className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="text-3xl font-bold text-primary-black dark:text-gray-200 mb-8">
+          <h2 className="text-3xl font-extrabold text-primary-black dark:text-gray-100 mb-8">
             Para você
+            <span className="text-primary-yellow">.</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="relative group overflow-hidden rounded-2xl">
@@ -316,11 +319,13 @@ export default function Home() {
 
         {/* Category Showcase Section */}
         <section className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="text-3xl font-bold text-primary-black dark:text-gray-200 mb-8">
-            Itens em Ofertas agora!
+          <h2 className="text-3xl font-extrabold text-primary-black dark:text-gray-100 mb-8 animate__animated animate__fadeIn">
+            Itens em Ofertas agora
+            <span className="text-primary-yellow">.</span>
           </h2>
 
-          {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-2">
+          {/* Grid offers aligned */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-2">
             {products.length > 0 && (
               <>
                 <Product product={products[0]} size="full" priority={true} />
@@ -334,7 +339,7 @@ export default function Home() {
                 ))}
               </>
             )}
-          </div> */}
+          </div>
 
           {/* Secondary Grid */}
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
