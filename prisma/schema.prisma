@@ -47,6 +47,25 @@ model Products {
   description String
   url         String
   price       Int
+  category    String? // New field
+  specs       Json? // New field for technical specifications
+  relatedIds  String? // New field for "Compre junto" products
+  rating      Float? // New field for average rating
   created_at  DateTime?   @default(now()) @db.Timestamptz(6)
+  reviews     Review[]
   orderItem   OrderItem[]
+
+  @@map("products")
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  productId Int       @map("product_id")
+  userId    String    @map("user_id") @db.Uuid
+  rating    Int
+  comment   String?
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  product   Products  @relation(fields: [productId], references: [id])
+
+  @@map("reviews")
 }
