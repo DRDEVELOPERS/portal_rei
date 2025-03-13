@@ -4,15 +4,11 @@ const nextConfig = {
     domains: [
       "cdn.diferpan.com.br",
       "www.diferpan.com.br",
-      "m.media-amazon.com", // Remove https:// prefix
-    ],
+      "https://m.media-amazon.com",
+    ], // Add your image hosts here
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
-    unoptimized: true,
-  },
-  experimental: {
-    serverActions: true,
-    serverComponentsExternalPackages: ["@prisma/client"],
+    unoptimized: true, // Add this line
   },
 };
 
