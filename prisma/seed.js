@@ -3,207 +3,104 @@ const prisma = new PrismaClient();
 
 async function seedProducts() {
   try {
-    await prisma.products.create({
+    // Create main products
+    const product1 = await prisma.products.create({
       data: {
-        title: "Produto1",
+        title: "Esmerilhadeira Angular 4 1/2 Pol. 850W",
         description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Esmerilhadeira profissional com disco de 115mm e potência de 850W, ideal para corte e desbaste de materiais metálicos.",
         url: "https://cdn.diferpan.com.br/produtos/15541/15541.jpg",
-        price: 2500, // EG: 25.00
+        price: 28990, // R$ 289,90
+        category: "Ferramentas Elétricas",
+        specs: {
+          marca: "Makita",
+          modelo: "GA4530",
+          voltagem: ["110V", "220V"],
+          potência: "850W",
+          rotação: "11.000 rpm",
+          peso: "1,8 kg",
+          garantia: "12 meses",
+        },
+        relatedIds: "2,3",
+        rating: 4.5,
       },
     });
 
-    await prisma.products.create({
+    const product2 = await prisma.products.create({
       data: {
-        title: "Produto2",
+        title: "Jogo de Chaves Combinadas",
         description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Jogo com 12 peças de chaves combinadas em aço cromo-vanádio, tamanhos de 6mm a 24mm.",
         url: "https://cdn.diferpan.com.br/produtos/11850/11850.jpg",
-        price: 1999,
+        price: 12499, // R$ 124,99
+        category: "Ferramentas Manuais",
+        specs: {
+          marca: "Tramontina",
+          material: "Aço cromo-vanádio",
+          peças: 12,
+          tamanhos: "6mm a 24mm",
+          garantia: "Vitalícia",
+        },
+        relatedIds: "1,3",
+        rating: 4.2,
       },
     });
 
-    await prisma.products.create({
+    const product3 = await prisma.products.create({
       data: {
-        title: "Produto3",
+        title: "Serra Tico-Tico 500W",
         description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "Serra tico-tico profissional com potência de 500W e curso de 20mm, ideal para cortes precisos em madeira.",
         url: "https://cdn.diferpan.com.br/produtos/25990/25990.jpg",
-        price: 9999,
+        price: 32900, // R$ 329,00
+        category: "Ferramentas Elétricas",
+        specs: {
+          marca: "Bosch",
+          modelo: "GST 500",
+          potência: "500W",
+          curso: "20mm",
+          velocidade: "3.100 rpm",
+          peso: "3,2 kg",
+        },
+        relatedIds: "1,2",
+        rating: 4.7,
       },
     });
 
-    await prisma.products.create({
-      data: {
-        title: "Produto4",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/12634/12634.jpg",
-        price: 5999,
-      },
+    // Create reviews
+    await prisma.review.createMany({
+      data: [
+        {
+          productId: product1.id,
+          userId: "user-001",
+          rating: 5,
+          comment:
+            "Excelente esmerilhadeira, potência ótima e construção robusta!",
+        },
+        {
+          productId: product1.id,
+          userId: "user-002",
+          rating: 4,
+          comment: "Bom produto, mas o cabo poderia ser mais ergonômico",
+        },
+        {
+          productId: product2.id,
+          userId: "user-003",
+          rating: 5,
+          comment: "Chaves de ótima qualidade, acabamento impecável",
+        },
+        {
+          productId: product3.id,
+          userId: "user-004",
+          rating: 4,
+          comment: "Precisa de mais acessórios incluídos, mas funciona bem",
+        },
+      ],
     });
 
-    await prisma.products.create({
-      data: {
-        title: "Produto5",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/22253/22253.jpg",
-        price: 1299,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto6",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/13535/13535.jpg",
-        price: 6589,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto7",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/11695/11695.jpg",
-        price: 22499,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto8",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/13379/13379.jpg",
-        price: 23599,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto9",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/17792/17792_B.jpg",
-        price: 8999,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto10",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/17792/17792_B.jpg",
-        price: 159599,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto11",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/21102/21102.jpg",
-        price: 999599,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto12",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/16469/16469.jpg",
-        price: 9699,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto13",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/8988/8988.jpg",
-        price: 125,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto14",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://cdn.diferpan.com.br/produtos/8130/8130.jpg",
-        price: 1599,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto15",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://www.diferpan.com.br/produto/16931/bota-pretaamarela-n40-innpro",
-        price: 259,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto16",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://www.diferpan.com.br/produto/19025/botina-elstico-agro-n-44-imbiseg",
-        price: 104959,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto17",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://www.diferpan.com.br/produto/25137/aditivo-plastificante-galo-36-litros-quartzolit",
-        price: 99999,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto18",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://www.diferpan.com.br/produto/3507/fogareiro-2-x-1-para-disco-e-panela-papalguas",
-        price: 8999,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto19",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://www.diferpan.com.br/produto/16372/jimo-silicone-gel-lavanda-200-gramas",
-        price: 256595,
-      },
-    });
-
-    await prisma.products.create({
-      data: {
-        title: "Produto20",
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        url: "https://www.diferpan.com.br/produto/23119/conversor-digitalhdtv-e-gravador-aqurio",
-        price: 12595,
-      },
-    });
+    console.log("Seed completed successfully!");
   } catch (error) {
-    console.error(error);
+    console.error("Seed error:", error);
   } finally {
     await prisma.$disconnect();
   }
