@@ -4,33 +4,25 @@ import prisma from "@/lib/prisma";
 
 export async function GET(request, { params }) {
   try {
-    // Properly access parameters
-    const { id } = params;
+    // Ensure params are awaited properly
+    const { id } = await params;
+    const numericId = Number(id);
 
-    // Validate ID
-    if (!id || isNaN(id)) {
+    if (isNaN(numericId)) {
       return NextResponse.json(
         { error: "Invalid product ID" },
         { status: 400 }
       );
     }
 
-    // Fetch product with reviews
     const product = await prisma.products.findUnique({
-      where: { id: Number(id) },
-      include: {
-        reviews: {
-          orderBy: { createdAt: "desc" },
-          take: 10,
-        },
-      },
+      where: { id: numericId },
+      include: { reviews: true },
     });
 
-    if (!product) {
-      return NextResponse.json({ error: "Product not found" }, { status: 404 });
-    }
-
-    return NextResponse.json(product);
+    return product
+      ? NextResponse.json(product)
+      : NextResponse.json({ error: "Product not found" }, { status: 404 });
   } catch (error) {
     console.error("Product API Error:", error);
     return NextResponse.json(

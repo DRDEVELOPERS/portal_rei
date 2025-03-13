@@ -4,9 +4,11 @@ import prisma from "@/lib/prisma";
 
 export async function GET(request, { params }) {
   try {
-    const { id } = params;
+    // Ensure params are awaited properly
+    const { id } = await params;
+    const numericId = Number(id);
 
-    if (!id || isNaN(id)) {
+    if (isNaN(numericId)) {
       return NextResponse.json(
         { error: "Invalid product ID" },
         { status: 400 }
@@ -14,8 +16,7 @@ export async function GET(request, { params }) {
     }
 
     const reviews = await prisma.review.findMany({
-      where: { productId: Number(id) },
-      orderBy: { createdAt: "desc" },
+      where: { productId: numericId },
     });
 
     return NextResponse.json(reviews);
