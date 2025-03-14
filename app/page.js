@@ -128,7 +128,8 @@ export default function Home() {
                 }`}
               >
                 <GridTileImage
-                  src={`${product.url}/800`}
+                  // src={`${product.url}/800`}
+                  src={product.url}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   alt={product.title}

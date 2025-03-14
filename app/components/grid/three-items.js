@@ -20,8 +20,8 @@ export function ThreeItemGridItem({ item, size, priority }) {
         prefetch
       >
         <GridTileImage
-          // src={item.url}
-          src={`${item.url}/500`}
+          src={item.url}
+          // src={`${item.url}/500`}
           fill
           sizes={
             size === "full"
