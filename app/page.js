@@ -202,18 +202,22 @@ export default function Home() {
           {/* Secondary Grid */}
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
             {products.slice(3).map((product) => (
-              <div key={product.id} className="aspect-square">
+              <div
+                key={product.id}
+                className="group relative aspect-square overflow-hidden rounded-2xl"
+              >
                 <GridTileImage
-                  // src={product.url}
-                  src={`${product.url}/500`}
-                  fill={true}
-                  sizes="(min-width: 768px) 25vw, 50vw"
+                  src={product.url}
                   alt={product.title}
                   label={{
                     title: product.title,
                     amount: (product.price / 100).toFixed(2),
+                    currencyCode: "BRL",
                     position: "bottom",
                   }}
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                  priority={false}
+                  className="hover:scale-105 transition-transform duration-300"
                 />
               </div>
             ))}

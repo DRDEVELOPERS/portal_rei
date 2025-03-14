@@ -38,7 +38,8 @@ export default function Product() {
         );
         setRelatedProducts(await related.json());
       }
-
+      const prod = await response.json();
+      setProduct(prod);
       cart.isItemAddedToCart(productData);
     } catch (error) {
       toast.error("Error loading product data");

@@ -9,7 +9,7 @@ async function seedProducts() {
         title: "Esmerilhadeira Angular 4 1/2 Pol. 850W",
         description:
           "Esmerilhadeira profissional com disco de 115mm e potência de 850W, ideal para corte e desbaste de materiais metálicos.",
-        url: "https://cdn.diferpan.com.br/produtos/15541/15541.jpg",
+        url: "https://cdn.diferpan.com.br/produtos/25876/25876.jpg",
         price: 28990, // R$ 289,90
         category: "Ferramentas Elétricas",
         specs: {

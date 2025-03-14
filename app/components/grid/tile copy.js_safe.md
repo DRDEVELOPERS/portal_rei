@@ -10,7 +10,7 @@ export function GridTileImage({
   src,
   fill,
   sizes,
-  priority = false,
+  priority,
   alt,
   className,
 }) {
