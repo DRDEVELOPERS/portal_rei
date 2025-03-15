@@ -16,6 +16,8 @@ import Product from "./components/Product";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 
+import TwilioTest from "./components/test/twilioTest";
+
 export default function Home() {
   const [products, setProducts] = useState([]);
 
@@ -474,6 +476,12 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* Other components */}
+      <section className="mx-auto max-w-7xl px-4 py-12">
+        <h2 className="text-2xl font-bold mb-4">Teste de WhatsApp</h2>
+        <TwilioTest />
+      </section>
     </MainLayout>
   );
 }
