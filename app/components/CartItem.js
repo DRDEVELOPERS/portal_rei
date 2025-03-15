@@ -29,7 +29,7 @@ export default function CartItem({ product }) {
               {product?.title}
             </div>
             <div className="font-bold text-lg">
-              £{(product?.price / 100).toFixed(2)}
+              R${(product?.price / 100).toFixed(2)}
             </div>
           </div>
 

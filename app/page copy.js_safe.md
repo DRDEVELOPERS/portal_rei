@@ -14,7 +14,6 @@ import { GridTileImage } from "./components/grid/tile";
 
 import useIsLoading from "./hooks/useIsLoading";
 import Product from "./components/Product";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -146,101 +145,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/**Prime Section Destaque */}
-        <section className="mx-auto max-w-7xl px-4 py-12 bg-primary-black/50 relative">
-          {/* Yellow border line */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-primary-yellow"></div>
-
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-4xl font-extrabold text-primary-yellow animate__animated animate__slideInLeft">
-              Ofertas em Destaque
-              <span className="text-primary-yellow">.</span>
-            </h2>
-            <div className="flex gap-2">
-              <button
-                aria-label="Previous slide"
-                className="rounded-full bg-primary-yellow p-2 hover:bg-[#f8d634] transition-colors animate__animated animate__pulse animate__infinite"
-                onClick={() =>
-                  document
-                    .querySelector(".carousel-container")
-                    .scrollBy({ left: -300, behavior: "smooth" })
-                }
-              >
-                <BiChevronLeft className="h-6 w-6 text-primary-black" />
-              </button>
-              <button
-                aria-label="Next slide"
-                className="rounded-full bg-primary-yellow p-2 hover:bg-[#f8d634] transition-colors animate__animated animate__pulse animate__infinite"
-                onClick={() =>
-                  document
-                    .querySelector(".carousel-container")
-                    .scrollBy({ left: 300, behavior: "smooth" })
-                }
-              >
-                <BiChevronRight className="h-6 w-6 text-primary-black" />
-              </button>
-            </div>
-          </div>
-
-          <div className="carousel-container relative w-full overflow-x-auto pb-6 pt-1 hide-scrollbar">
-            <ul className="flex animate-carousel gap-4">
-              {[...products, ...products, ...products].map((product, i) => (
-                <li
-                  key={`${product.id}-${i}`}
-                  className="relative aspect-square h-[25vh] min-h-[200px] w-2/3 min-w-[250px] flex-none md:w-1/3 group"
-                >
-                  <Link
-                    href={`/product/${product.id}`}
-                    className="relative h-full w-full block"
-                  >
-                    {/* Product Image Container */}
-                    <div className="relative h-3/4 w-full overflow-hidden rounded-xl border-2 border-primary-yellow/30 hover:border-primary-yellow/60 transition-all">
-                      <GridTileImage
-                        alt={product.title}
-                        src={product.url}
-                        fill
-                        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                        className="object-cover transform transition duration-500 group-hover:scale-110"
-                      />
-
-                      {/* Discount Badge */}
-                      <div className="absolute top-2 left-2 bg-primary-yellow text-primary-black px-3 py-1 rounded-full text-sm font-bold animate__animated animate__bounceIn">
-                        {product.discountPercentage || 5}% OFF
-                      </div>
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="pt-4 px-2">
-                      <h3 className="text-lg font-bold text-primary-yellow truncate">
-                        {product.title}
-                      </h3>
-                      <div className="flex items-baseline gap-2 mt-1">
-                        <span className="text-gray-300 line-through text-sm">
-                          DE: R$ {((product.price * 1.05) / 100).toFixed(2)}
-                        </span>
-                        <span className="text-xl font-bold text-primary-yellow">
-                          R$ {(product.price / 100).toFixed(2)}
-                        </span>
-                      </div>
-                      <p className="text-gray-300 text-sm mt-2">
-                        à vista no Pix ou Boleto
-                        <br />
-                        ou {product.installments || 4}x de R${" "}
-                        {(
-                          product.price /
-                          (product.installments || 4) /
-                          100
-                        ).toFixed(2)}{" "}
-                        sem juros
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         {/* Brand Showcase */}
         <section className="bg-gray-100 dark:bg-gray-900 py-16">
           <div className="max-w-7xl mx-auto px-4">
@@ -270,6 +174,7 @@ export default function Home() {
         <TopHeader />
 
         {/* Featured Products Section */}
+
         <section className="mx-auto max-w-7xl px-4 py-12">
           <div className="text-justify space-y-3 group">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4 bg-gradient-to-br from-blue-500 via-sky-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-md">
@@ -290,8 +195,10 @@ export default function Home() {
             </p>
             <p></p>
           </div>
+
           {/* Main Featured Grid */}
           <ThreeItemGrid products={products.slice(0, 3)} />
+
           {/* Secondary Grid */}
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
             {products.slice(3).map((product) => (

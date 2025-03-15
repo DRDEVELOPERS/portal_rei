@@ -101,3 +101,18 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
+
+@keyframes carousel {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.animate-carousel {
+  animation: carousel 40s linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .carousel-container:hover .animate-carousel {
+    animation-play-state: paused;
+  }
+}

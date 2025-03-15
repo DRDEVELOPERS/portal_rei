@@ -74,30 +74,28 @@ export default function Product() {
           </div>
 
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-primary-black">
-              {product.title}
-            </h1>
+            <h1 className="text-3xl font-bold text-yellow">{product.title}</h1>
 
             <RatingStars rating={product.rating} reviewCount={reviews.length} />
 
             <div className="bg-primary-yellow/10 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-primary-black">
+              <div className="text-2xl font-bold text-primary-yellow">
                 {product.price?.toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
               </div>
-              <div className="text-sm text-gray-600">à vista no PIX</div>
+              <div className="text-sm text-yellow-600">à vista no PIX</div>
             </div>
 
             <button
               onClick={() => {
                 if (cart.isItemAdded) {
                   cart.removeFromCart(product);
-                  toast.info("Removed from cart", { autoClose: 3000 });
+                  toast.info("Remover do Carrinho", { autoClose: 3000 });
                 } else {
                   cart.addToCart(product);
-                  toast.success("Added to cart", { autoClose: 3000 });
+                  toast.success("Adicionado do Carrinho", { autoClose: 3000 });
                 }
               }}
               className={`
@@ -109,7 +107,9 @@ export default function Product() {
                     }
                   `}
             >
-              {cart.isItemAdded ? "Remove From Cart" : "Add To Cart"}
+              {cart.isItemAdded
+                ? "Remover do Carrinho"
+                : "Adicionar ao Carrinho"}
             </button>
 
             <ProductSpecs specs={product.specs} />

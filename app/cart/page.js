@@ -94,7 +94,7 @@ export default function Cart() {
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700 
                   animate__animated animate__bounceInRight"
                 >
-                  <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+                  <h2 className="text-xl font-bold mb-6">Resumo da Compra</h2>
 
                   {/* Progress Bar */}
                   <div className="mb-6">
@@ -112,12 +112,12 @@ export default function Cart() {
                     <div className="text-sm text-gray-500 dark:text-gray-400">
                       {cart.cartTotal() < 10000 ? (
                         <>
-                          Add £{(10000 - cart.cartTotal()) / 100} more for free
+                          Add R${(10000 - cart.cartTotal()) / 100} more for free
                           shipping!
                         </>
                       ) : (
                         <span className="text-green-500">
-                          🎉 Free shipping unlocked!
+                          🎉 Frete-Grátis para todo o Brasil!
                         </span>
                       )}
                     </div>
@@ -128,22 +128,22 @@ export default function Cart() {
                     <div className="flex justify-between">
                       <span>Subtotal ({cart.getCart().length} items)</span>
                       <span className="font-semibold">
-                        £{(cart.cartTotal() / 100).toFixed(2)}
+                        R${(cart.cartTotal() / 100).toFixed(2)}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="flex items-center gap-2">
                         <FiTruck className="text-primary-yellow" />
-                        Shipping
+                        Entrega
                       </span>
-                      <span className="text-green-500">Free</span>
+                      <span className="text-green-500">Grátis</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="flex items-center gap-2">
                         <FiGift className="text-primary-yellow" />
-                        Discounts
+                        Descontos
                       </span>
-                      <span>-£0.00</span>
+                      <span>-R$0.00</span>
                     </div>
                   </div>
 
@@ -152,7 +152,7 @@ export default function Cart() {
                   {/* Total */}
                   <div className="flex justify-between text-xl font-bold mb-6">
                     <span>Total</span>
-                    <span>£{(cart.cartTotal() / 100).toFixed(2)}</span>
+                    <span>R${(cart.cartTotal() / 100).toFixed(2)}</span>
                   </div>
 
                   {/* Checkout Button */}
@@ -163,7 +163,7 @@ export default function Cart() {
                       hover:bg-opacity-90 transition-all duration-200 animate__animated animate__pulse
                       flex items-center justify-center gap-2"
                   >
-                    Secure Checkout
+                    Compra Segura
                   </button>
 
                   {/* Safety Info */}
@@ -177,7 +177,7 @@ export default function Cart() {
                     onClick={handleEmptyCart}
                     className="mt-6 text-sm text-red-500 hover:text-red-600 w-full text-center"
                   >
-                    Empty Cart
+                    Esvaziar Carrinho
                   </button>
                 </div>
 

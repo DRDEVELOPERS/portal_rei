@@ -1,30 +1,22 @@
-// app/api/reviews/[id]/route.js
-import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
-
-export async function GET(request, { params }) {
+// app/api/product/[id]/route.js
+export async function GET(req, { params }) {
   try {
-    // Ensure params are awaited properly
-    const { id } = await params;
-    const numericId = Number(id);
-
-    if (isNaN(numericId)) {
-      return NextResponse.json(
-        { error: "Invalid product ID" },
-        { status: 400 }
-      );
-    }
-
-    const reviews = await prisma.review.findMany({
-      where: { productId: numericId },
+    const product = await prisma.products.findUnique({
+      where: { id: params.id },
     });
 
-    return NextResponse.json(reviews);
+    if (!product) {
+      return new Response(JSON.stringify({ error: "Product not found" }), {
+        status: 404,
+      });
+    }
+
+    return new Response(JSON.stringify(product), {
+      status: 200,
+    });
   } catch (error) {
-    console.error("Reviews API Error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: "Server error" }), {
+      status: 500,
+    });
   }
 }
