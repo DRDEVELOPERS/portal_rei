@@ -9,7 +9,6 @@ import MainLayout from "./layouts/MainLayout";
 import TopHeader from "./layouts/includes/TopHeader";
 import CarouselComp from "./components/CarouselComp";
 import { ThreeItemGrid } from "./components/grid/three-items";
-import { Grid, GridItem } from "./components/grid";
 import { GridTileImage } from "./components/grid/tile";
 
 import useIsLoading from "./hooks/useIsLoading";
@@ -152,7 +151,7 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-1 bg-primary-yellow"></div>
 
           <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-4xl font-extrabold text-primary-yellow">
+            <h2 className="text-4xl font-extrabold text-primary-black dark:text-gray-100">
               Ofertas em Destaque
               <span className="text-primary-yellow">.</span>
             </h2>
@@ -195,7 +194,7 @@ export default function Home() {
                       {/* Discount Banner */}
                       <div className="flex items-start justify-between bg-gradient-to-r from-primary-yellow to-[#f8d634] rounded-t-lg px-4 py-2 -mx-[1px] -mt-[1px]">
                         <div className="flex-1 pr-2">
-                          <p className="text-primary-black uppercase font-bold text-sm leading-tight">
+                          <p className="text-primary-black uppercase font-bold text-lg leading-tight">
                             {discount}% DE DESCONTO
                           </p>
                           <p className="text-[10px] text-primary-black/80 mt-1">
