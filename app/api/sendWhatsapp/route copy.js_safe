@@ -1,0 +1,33 @@
+// app/api/sendWhatsapp/route.js
+import { NextResponse } from "next/server";
+import Twilio from "twilio";
+
+export async function POST(req) {
+  const { to, contentSid, variables } = await req.json();
+
+  try {
+    const client = Twilio(
+      process.env.TWILIO_ACCOUNT_SID,
+      process.env.TWILIO_AUTH_TOKEN
+    );
+
+    const response = await client.messages.create({
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: `whatsapp:${to}`,
+      contentSid,
+      contentVariables: JSON.stringify(variables), // Proper JSON string
+    });
+
+    return NextResponse.json({
+      success: true,
+      sid: response.sid,
+      status: response.status,
+    });
+  } catch (error) {
+    console.error("Twilio error:", error);
+    return NextResponse.json(
+      { error: error.message },
+      { status: error.status || 500 }
+    );
+  }
+}

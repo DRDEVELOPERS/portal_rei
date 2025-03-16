@@ -11,7 +11,7 @@ export default function Product({ product }) {
         className=" bg-primary-yellow rounded-2xl max-w-[200px] p-1.5 border border-gray-50 hover:border-gray-200 hover:shadow-xl bg-gray-100 rounded mx-auto"
       >
         {product?.url ? (
-          <img className="rounded cursor-pointer" src={product.url + "/190"} />
+          <img className="rounded cursor-pointer" src={product.url} />
         ) : null}
 
         <div className="pt-2 px-1">

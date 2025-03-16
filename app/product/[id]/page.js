@@ -92,7 +92,9 @@ export default function Product() {
               onClick={() => {
                 if (cart.isItemAdded) {
                   cart.removeFromCart(product);
-                  toast.info("Remover do Carrinho", { autoClose: 3000 });
+                  toast.info("Removido do Carrinho com suscesso!", {
+                    autoClose: 3000,
+                  });
                 } else {
                   cart.addToCart(product);
                   toast.success("Adicionado do Carrinho", { autoClose: 3000 });

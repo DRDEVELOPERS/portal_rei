@@ -7,21 +7,20 @@ export default function CartItem({ product }) {
 
   const removeItemFromCart = () => {
     let res = confirm(
-      `Are you sure you want to remove this? "${product.title}"`
+      `O produto será removido do carrinho.Tem certeza que deseja confirmar? "${product.title}"`
     );
     if (res) {
       cart.removeFromCart(product);
-      toast.info("Removed from cart", { autoClose: 3000 });
+      toast.info("Produto removido do carrinho com sucesso", {
+        autoClose: 3000,
+      });
     }
   };
 
   return (
     <>
       <div className="relative flex justify-start my-2 border w-full p-6">
-        <img
-          src={product?.url + "/150"}
-          className="rounded-md w-[150px] h-[150px]"
-        />
+        <img src={product?.url} className="rounded-md w-[150px] h-[150px]" />
 
         <div className="overflow-hidden pl-2 w-full">
           <div className="flex items-center justify-between w-full">
@@ -33,7 +32,9 @@ export default function CartItem({ product }) {
             </div>
           </div>
 
-          <div className="font-semibold mt-2">NEW</div>
+          <div className="font-semibold mt-2">
+            Vendido e entregue por PortalFerragem.shop
+          </div>
 
           <div className="text-sm mt-2">
             {product?.description.substring(0, 150)}...
@@ -44,7 +45,7 @@ export default function CartItem({ product }) {
               onClick={() => removeItemFromCart()}
               className="underline text-blue-500"
             >
-              Remove
+              Remover
             </button>
           </div>
         </div>
