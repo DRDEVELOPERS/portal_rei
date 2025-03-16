@@ -14,13 +14,11 @@ import ClientOnly from "@/components/ClientOnly";
 import { animateCSS } from "@/utils/animations";
 import debounce from "debounce";
 import { FiTruck, FiGift, FiAlertCircle } from "react-icons/fi";
-import Modal from "../components/ui/modal";
 
 export default function Cart() {
   const router = useRouter();
   const cart = useCart();
   const [isAnimating, setIsAnimating] = useState(false);
-  const [showClearCartModal, setShowClearCartModal] = useState(false);
 
   useEffect(() => {
     useIsLoading(true);
@@ -43,32 +41,15 @@ export default function Cart() {
 
   const handleEmptyCart = () => {
     animateCSS("#cartItems", "flipOutX").then(() => {
-      // cart.emptyCart();
-      cart.clearCart();
+      cart.emptyCart();
     });
-    setShowClearCartModal(false);
   };
 
   return (
     <MainLayout>
-      {/* Clear Cart Modal */}
-      <Modal
-        isOpen={showClearCartModal}
-        onClose={() => setShowClearCartModal(false)}
-        title="Esvaziar Carrinho"
-        message="Tem certeza que deseja remover todos os itens do seu carrinho?"
-        onConfirm={handleEmptyCart}
-      />
-      ;
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
-        {/* <h1 className="text-4xl font-extrabold text-primary-black dark:text-gray-100 mb-8 animate__animated animate__fadeIn">
-          O seu carrinho está vazio
-          <span className="text-primary-yellow">.</span>
-        </h1> */}
         <h1 className="text-4xl font-extrabold text-primary-black dark:text-gray-100 mb-8 animate__animated animate__fadeIn">
-          {cart.getCart().length === 0
-            ? "O seu carrinho está vazio"
-            : "Confira os itens no seu carrinho"}
+          O seu carrinho está vazio
           <span className="text-primary-yellow">.</span>
         </h1>
 
@@ -192,16 +173,9 @@ export default function Cart() {
                   </div>
 
                   {/* Empty Cart */}
-                  {/* <button
+                  <button
                     onClick={handleEmptyCart}
                     className="mt-6 text-sm text-red-500 hover:text-red-600 w-full text-center"
-                  >
-                    Esvaziar Carrinho
-                  </button> */}
-                  <button
-                    onClick={() => setShowClearCartModal(true)}
-                    className="mt-6 text-sm text-red-500 hover:text-red-600 w-full text-center
-    hover:underline transition-all duration-200"
                   >
                     Esvaziar Carrinho
                   </button>

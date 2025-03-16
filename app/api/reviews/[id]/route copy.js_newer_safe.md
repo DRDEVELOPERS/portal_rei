@@ -1,12 +1,8 @@
 // app/api/product/[id]/route.js
 export async function GET(req, { params }) {
   try {
-    // First await the params promise
-    const { id } = await params;
-
-    // Then use the destructured id
     const product = await prisma.products.findUnique({
-      where: { id: Number(id) }, // Convert to number if needed
+      where: { id: await params.id },
     });
 
     if (!product) {
