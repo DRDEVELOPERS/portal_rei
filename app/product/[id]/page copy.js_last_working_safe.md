@@ -55,8 +55,8 @@ export default function Product() {
 
   const handleCartAction = () => {
     if (cart.isItemAdded) {
-      cart.removeFromCart(product.id);
-      toast.info("Removido do Carrinho com sucesso!", { autoClose: 3000 });
+      cart.removeFromCart(product);
+      toast.info("Removido do carrinho", { autoClose: 3000 });
     } else {
       cart.addToCart(product);
       toast.success("Adicionado ao carrinho", { autoClose: 3000 });
@@ -90,33 +90,31 @@ export default function Product() {
               <div className="text-sm text-yellow-600">à vista no PIX</div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <button
-                onClick={handleCartAction}
-                className={`
-                  flex-1 text-white py-3 px-8 rounded-full cursor-pointer 
-                  ${
-                    cart.isItemAdded
-                      ? "bg-[#e9a321] hover:bg-[#bf851a]"
-                      : "bg-[#3498C9] hover:bg-[#0054A0]"
-                  } transition-colors duration-200 font-semibold
-                `}
-              >
-                {cart.isItemAdded
-                  ? "Remover do Carrinho"
-                  : "Adicionar ao Carrinho"}
-              </button>
-
-              {cart.isItemAdded && (
-                <button
-                  onClick={() => router.push("/cart")}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 md:px-8 rounded-full 
-                    transition-colors duration-200 font-semibold flex items-center justify-center gap-2 whitespace-nowrap"
-                >
-                  Ver Carrinho ({cart.cartCount()})
-                </button>
-              )}
-            </div>
+            <button
+              onClick={() => {
+                if (cart.isItemAdded) {
+                  cart.removeFromCart(product);
+                  toast.info("Removido do Carrinho com suscesso!", {
+                    autoClose: 3000,
+                  });
+                } else {
+                  cart.addToCart(product);
+                  toast.success("Adicionado do Carrinho", { autoClose: 3000 });
+                }
+              }}
+              className={`
+                    text-white py-2 px-20 rounded-full cursor-pointer 
+                    ${
+                      cart.isItemAdded
+                        ? "bg-[#e9a321] hover:bg-[#bf851a]"
+                        : "bg-[#3498C9] hover:bg-[#0054A0]"
+                    }
+                  `}
+            >
+              {cart.isItemAdded
+                ? "Remover do Carrinho"
+                : "Adicionar ao Carrinho"}
+            </button>
 
             <ProductSpecs specs={product.specs} />
           </div>
