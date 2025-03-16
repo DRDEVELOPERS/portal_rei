@@ -183,18 +183,18 @@ export default function Cart() {
 
                 {/* Promo Code */}
                 <div className="mt-6 bg-primary-yellow/10 p-6 rounded-xl animate__animated animate__fadeIn">
-                  <h3 className="font-semibold mb-3">Have a promo code?</h3>
+                  <h3 className="font-semibold mb-3">Tem Cupom de Desconto?</h3>
                   <div className="flex gap-2">
                     <input
                       type="text"
-                      placeholder="Enter code"
+                      placeholder="Inserir Código"
                       className="flex-1 rounded-lg px-4 py-2 border focus:ring-primary-yellow"
                     />
                     <button
                       className="bg-primary-black text-white px-6 py-2 rounded-lg
                       hover:bg-opacity-90 transition-colors"
                     >
-                      Apply
+                      Aplicar Desconto
                     </button>
                   </div>
                 </div>

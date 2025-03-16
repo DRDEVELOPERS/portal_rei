@@ -2,92 +2,97 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const Context = createContext();
 
 const Provider = ({ children }) => {
   const router = useRouter();
-
   const [isItemAdded, setIsItemAdded] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    setCartItems(getCart());
+  }, []);
 
   const getCart = () => {
-    let cart = [];
-    if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
-    }
-    return cart;
+    if (typeof localStorage === "undefined") return [];
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  };
+
+  const updateLocalStorage = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    setCartItems(cart);
+    // router.refresh();
   };
 
   const addToCart = (product) => {
-    let cart = [];
-    if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = getCart();
+    const existingItem = cart.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      cart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    } else {
+      cart.push({ ...product, quantity: 1 });
     }
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateLocalStorage(cart);
     isItemAddedToCart(product);
-    router.refresh();
   };
 
-  const removeFromCart = (product) => {
-    let cart = [];
-    if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
-    }
-    cart = cart.filter((item) => item.id !== product.id);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    isItemAddedToCart(product);
-    router.refresh();
+  const updateQuantity = (productId, newQuantity) => {
+    let cart = getCart();
+    cart = cart
+      .map((item) => {
+        if (item.id === productId) {
+          if (newQuantity < 1) return null;
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      })
+      .filter(Boolean);
+
+    updateLocalStorage(cart);
   };
 
-  const isItemAddedToCart = (product) => {
-    let cart = [];
-    if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
-    }
-    cart = cart.filter((item) => item.id === product.id);
-
-    if (cart.length > 0) {
-      setIsItemAdded(true);
-      return;
-    }
-
+  const removeFromCart = (productId) => {
+    const cart = getCart().filter(item => item.id !== productId);
+    updateLocalStorage(cart);
     setIsItemAdded(false);
   };
 
+  // const removeFromCart = (product) => {
+  //   let cart = getCart().filter((item) => item.id !== product.id);
+  //   updateLocalStorage(cart);
+  //   isItemAddedToCart(product);
+  // };
+
+  const isItemAddedToCart = (product) => {
+    const cart = getCart();
+    const exists = cart.some((item) => item.id === product.id);
+    setIsItemAdded(exists);
+  };
+
   const cartCount = () => {
-    let cart = [];
-    if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
-    }
-    return cart.length;
+    return getCart().reduce((sum, item) => sum + item.quantity, 0);
   };
 
   const cartTotal = () => {
-    let total = 0;
-    let cart = [];
-    if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
-    }
-    for (let i = 0; i < cart.length; i++) {
-      const element = cart[i];
-      total += element.price;
-    }
-
-    return total;
+    return getCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
 
   const clearCart = () => {
-    localStorage.removeItem("cart");
-    router.refresh();
+    updateLocalStorage([]);
   };
 
   const exposed = {
     isItemAdded,
-    getCart,
+    getCart: () => cartItems,
     addToCart,
     removeFromCart,
+    updateQuantity,
     isItemAddedToCart,
     cartCount,
     cartTotal,
@@ -98,5 +103,4 @@ const Provider = ({ children }) => {
 };
 
 export const useCart = () => useContext(Context);
-
 export default Provider;
