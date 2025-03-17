@@ -1,7 +1,6 @@
 // app/components/sections/FeaturedProducts.js
 "use client";
 
-import Link from "next/link";
 import { GridTileImage } from "../grid/tile";
 
 export default function FeaturedProducts({ products }) {
@@ -14,9 +13,8 @@ export default function FeaturedProducts({ products }) {
 
       <div className="product-grid grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
         {products.slice(0, 6).map((product, index) => (
-          <Link
+          <div
             key={product.id}
-            href={`/product/${product.id}`}
             className={`relative aspect-square overflow-hidden rounded-xl transition-transform duration-300 hover:scale-105 ${
               index === 0 ? "md:col-span-4 md:row-span-2" : "md:col-span-2"
             }`}
@@ -37,7 +35,7 @@ export default function FeaturedProducts({ products }) {
                 50% OFF
               </div>
             )}
-          </Link>
+          </div>
         ))}
       </div>
     </section>
