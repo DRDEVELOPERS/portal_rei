@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <MainLayout>
       <div className="mt-12">
-        <TopHeader />
+        {/* <TopHeader /> */}
         <HeroSection />
         <FeaturedCategories />
         <PromoBanner />
