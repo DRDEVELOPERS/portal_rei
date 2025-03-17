@@ -1,4 +1,4 @@
-//app/layouts/MainLayout.js
+//app/layouts/MainHeader.js
 "use client";
 
 import debounce from "lodash/debounce";

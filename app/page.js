@@ -15,6 +15,7 @@ import NewsletterSection from "./components/sections/NewsletterSection";
 import InspirationGallery from "./components/sections/InspirationGallery";
 import CategoryShowcase from "./components/sections/CategoryShowcase";
 import useIsLoading from "./hooks/useIsLoading";
+import TopHeader from "./layouts/includes/TopHeader";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -39,6 +40,7 @@ export default function Home() {
   return (
     <MainLayout>
       <div className="mt-12">
+        <TopHeader />
         <HeroSection />
         <FeaturedCategories />
         <PromoBanner />

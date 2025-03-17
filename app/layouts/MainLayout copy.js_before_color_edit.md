@@ -30,9 +30,6 @@ export default function MainLayout({ children }) {
     <div className="min-h-screen flex flex-col">
       {isLoading && <Loading />}
 
-      {/* Gradient Accent Bar */}
-      <div className="h-5.5 bg-gradient-to-r from-yellow-400 to-yellow-300 w-full" />
-
       {/* Desktop Header */}
       <div className="hidden md:block">
         <TopMenu />
