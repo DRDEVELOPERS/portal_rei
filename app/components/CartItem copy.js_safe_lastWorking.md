@@ -73,25 +73,8 @@ export default function CartItem({ product }) {
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2 bg-primary-black/20 rounded-lg p-1">
-                    {/* <button
-                      onClick={() => updateQuantity(quantity - 1)}
-                      className="p-1.5 rounded-md hover:bg-primary-yellow/20 transition-colors"
-                    >
-                      {quantity > 1 ? (
-                        <FiMinus className="w-5 h-5 text-primary-yellow" />
-                      ) : (
-                        <FiTrash2 className="w-5 h-5 text-primary-yellow" />
-                      )}
-                    </button> */}
-
                     <button
-                      onClick={() => {
-                        if (quantity > 1) {
-                          updateQuantity(quantity - 1);
-                        } else {
-                          setShowDeleteModal(true);
-                        }
-                      }}
+                      onClick={() => updateQuantity(quantity - 1)}
                       className="p-1.5 rounded-md hover:bg-primary-yellow/20 transition-colors"
                     >
                       {quantity > 1 ? (
