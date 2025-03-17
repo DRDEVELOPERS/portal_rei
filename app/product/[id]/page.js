@@ -81,8 +81,14 @@ export default function Product() {
             <RatingStars rating={product.rating} reviewCount={reviews.length} />
 
             <div className="bg-primary-yellow/10 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-primary-yellow">
+              {/* <div className="text-2xl font-bold text-primary-yellow">
                 {product.price?.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </div> */}
+              <div className="text-2xl font-bold text-primary-yellow">
+                {(product.price / 100)?.toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
