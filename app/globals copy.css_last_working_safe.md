@@ -116,26 +116,3 @@ body {
     animation-play-state: paused;
   }
 }
-
-
-/* mobile-specific styles*/
-@media (max-width: 767px) {
-  #TopMenuLeft li:not(:first-child),
-  #TopMenuRight li:first-child {
-    display: none;
-  }
-  
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  
-  .carousel-container {
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-  }
-  
-  .carousel-container li {
-    scroll-snap-align: start;
-    min-width: 85vw;
-  }
-}

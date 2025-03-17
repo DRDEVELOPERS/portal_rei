@@ -1,39 +1,50 @@
-//app/layouts/MainLayout.js
+// app/layouts/MainLayout.js
 "use client";
 
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import TopMenu from "./includes/TopMenu";
 import MainHeader from "./includes/MainHeader";
 import SubMenu from "./includes/SubMenu";
 import Footer from "./includes/Footer";
 import Loading from "../components/Loading";
-import { useEffect, useState } from "react";
+
+const MobileMenu = dynamic(() => import("./includes/MobileMenu"), {
+  ssr: false,
+});
 
 export default function MainLayout({ children }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("storage", function () {
-      let res = localStorage.getItem("isLoading");
-      res === "false" ? setIsLoading(false) : setIsLoading(true);
-    });
-  });
+    const handleStorage = () => {
+      const res = localStorage.getItem("isLoading");
+      setIsLoading(res === "true");
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
 
   return (
-    <>
-      <div id="MainLayout" className="min-w-[1050px] max-w-[1300px] mx-auto">
-        <div>
-          {isLoading ? <Loading /> : <div></div>}
-          <TopMenu />
-          <MainHeader />
-          <SubMenu />
-        </div>
+    <div className="min-h-screen flex flex-col">
+      {isLoading && <Loading />}
 
-        <div>{children}</div>
-
-        <div>
-          <Footer />
-        </div>
+      {/* Desktop Header */}
+      <div className="hidden md:block">
+        <TopMenu />
+        <MainHeader />
+        <SubMenu />
       </div>
-    </>
+
+      {/* Mobile Menu */}
+      <div className="md:hidden">
+        <MobileMenu />
+      </div>
+
+      <main className="flex-1">{children}</main>
+
+      <Footer />
+    </div>
   );
 }
