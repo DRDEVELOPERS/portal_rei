@@ -1,7 +1,7 @@
 // app/components/sections/PrimeSection.js
 "use client";
 
-import { useRef, useEffect, useState } from "react"; // Added useState import
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
@@ -9,10 +9,8 @@ import { FiShoppingCart } from "react-icons/fi";
 
 export default function PrimeSection({ products }) {
   const carouselRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
-  const animationRef = useRef(null);
 
+  // Manual scroll function for buttons
   const scroll = (scrollOffset) => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
@@ -22,36 +20,34 @@ export default function PrimeSection({ products }) {
     }
   };
 
+  // Continuous auto-scroll using requestAnimationFrame
   useEffect(() => {
     let lastTimestamp = null;
-    const speed = 0.15;
+    // Adjust speed (pixels per millisecond). For example, 0.1 means 100px per second.
+    const speed = 0.1;
 
     const step = (timestamp) => {
-      if (!lastTimestamp) lastTimestamp = timestamp;
+      if (lastTimestamp === null) {
+        lastTimestamp = timestamp;
+      }
       const delta = timestamp - lastTimestamp;
-
-      if (!isHovered && !isTouched && carouselRef.current) {
+      if (carouselRef.current) {
         const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        const maxScroll = scrollWidth - clientWidth;
         const newScroll = scrollLeft + delta * speed;
-
-        if (newScroll >= maxScroll) {
-          carouselRef.current.scrollTo({ left: 0, behavior: "instant" });
+        // If reached the end, reset to start
+        if (newScroll + clientWidth >= scrollWidth) {
+          carouselRef.current.scrollTo({ left: 0 });
         } else {
-          carouselRef.current.scrollTo({
-            left: newScroll,
-            behavior: "instant",
-          });
+          carouselRef.current.scrollTo({ left: newScroll });
         }
       }
-
       lastTimestamp = timestamp;
-      animationRef.current = requestAnimationFrame(step);
+      requestAnimationFrame(step);
     };
 
-    animationRef.current = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [isHovered, isTouched]);
+    const animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, []);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 bg-primary-black/50 relative">
@@ -65,14 +61,14 @@ export default function PrimeSection({ products }) {
         <div className="flex gap-2">
           <button
             aria-label="Previous slide"
-            className="rounded-full bg-primary-yellow p-2 hover:bg-[#f8d634] transition-colors"
+            className="rounded-full bg-primary-yellow p-2 hover:bg-[#f8d634] transition-colors animate__animated animate__pulse animate__infinite"
             onClick={() => scroll(-300)}
           >
             <BiChevronLeft className="h-6 w-6 text-primary-black" />
           </button>
           <button
             aria-label="Next slide"
-            className="rounded-full bg-primary-yellow p-2 hover:bg-[#f8d634] transition-colors"
+            className="rounded-full bg-primary-yellow p-2 hover:bg-[#f8d634] transition-colors animate__animated animate__pulse animate__infinite"
             onClick={() => scroll(300)}
           >
             <BiChevronRight className="h-6 w-6 text-primary-black" />
@@ -83,10 +79,6 @@ export default function PrimeSection({ products }) {
       <div
         ref={carouselRef}
         className="relative w-full overflow-x-auto pb-6 pt-1 hide-scrollbar"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onTouchStart={() => setIsTouched(true)}
-        onTouchEnd={() => setIsTouched(false)}
       >
         <ul className="flex gap-4">
           {[...products, ...products, ...products].map((product, i) => {
@@ -122,6 +114,7 @@ export default function PrimeSection({ products }) {
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
+                      {/* Add to Cart Overlay */}
                       <div className="absolute inset-0 bg-primary-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <button className="bg-primary-yellow text-primary-black px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-[#f8d634] transition-colors">
                           <FiShoppingCart className="text-lg" />
@@ -130,6 +123,7 @@ export default function PrimeSection({ products }) {
                       </div>
                     </div>
 
+                    {/* Product Info */}
                     <div className="pt-4">
                       <h3 className="text-lg font-bold text-primary-yellow truncate">
                         {product.title}
