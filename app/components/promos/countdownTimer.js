@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FiClock } from "react-icons/fi";
 
 const CountdownTimer = ({ supabaseEndTime }) => {
   const [timeLeft, setTimeLeft] = useState({
@@ -45,6 +46,10 @@ const CountdownTimer = ({ supabaseEndTime }) => {
 
   return (
     <div className="flex items-center gap-2 bg-primary-yellow/20 px-4 py-2 rounded-full">
+      <div className="flex items-center gap-3 bg-primary-yellow/30 text-white px-4 py-2 rounded-full">
+        <FiClock className="w-5 h-5" />
+        <span className="text-sm md:text-base">Termina em:</span>
+      </div>
       <div className="text-center">
         <span className="text-xl font-bold text-primary-yellow">
           {timeLeft.hours}
