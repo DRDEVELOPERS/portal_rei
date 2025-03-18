@@ -64,6 +64,7 @@ export default function Product() {
       toast.success("Adicionado ao carrinho", { autoClose: 3000 });
     }
   };
+
   return (
     <MainLayout>
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -83,12 +84,6 @@ export default function Product() {
             <RatingStars rating={product.rating} reviewCount={reviews.length} />
 
             <div className="bg-primary-yellow/10 p-4 rounded-lg">
-              {/* <div className="text-2xl font-bold text-primary-yellow">
-                {product.price?.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </div> */}
               <div className="text-2xl font-bold text-primary-yellow">
                 {(product.price / 100)?.toLocaleString("pt-BR", {
                   style: "currency",
@@ -102,13 +97,13 @@ export default function Product() {
               <button
                 onClick={handleCartAction}
                 className={`
-      flex-1 text-white py-3 px-8 rounded-full cursor-pointer 
-      ${
-        cart.isItemAdded
-          ? "bg-[#e9a321] hover:bg-[#bf851a]"
-          : "bg-[#3498C9] hover:bg-[#0054A0]"
-      } transition-colors duration-200 font-semibold
-    `}
+                  flex-1 text-white py-3 px-8 rounded-full cursor-pointer 
+                  ${
+                    cart.isItemAdded
+                      ? "bg-[#e9a321] hover:bg-[#bf851a]"
+                      : "bg-[#3498C9] hover:bg-[#0054A0]"
+                  } transition-colors duration-200 font-semibold
+                `}
               >
                 {cart.isItemAdded
                   ? "Remover do Carrinho"
@@ -118,8 +113,7 @@ export default function Product() {
               {cart.isItemAdded && (
                 <button
                   onClick={() => router.push("/cart")}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 md:px-8 rounded-full 
-        transition-colors duration-200 font-semibold flex items-center justify-center gap-2 whitespace-nowrap"
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 md:px-8 rounded-full transition-colors duration-200 font-semibold flex items-center justify-center gap-2 whitespace-nowrap"
                 >
                   Ver Carrinho ({cart.cartCount()})
                 </button>
@@ -128,16 +122,23 @@ export default function Product() {
               {/* New Orange Button */}
               <button
                 onClick={() => router.push("/")}
-                className={`flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 px-8 rounded-full 
-      transition-colors duration-200 font-semibold ${
-        cart.isItemAdded ? "" : "mt-4"
-      }`}
+                className={`flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 px-8 rounded-full transition-colors duration-200 font-semibold ${
+                  cart.isItemAdded ? "" : "mt-4"
+                }`}
               >
                 {cart.isItemAdded ? "Continuar Comprando" : "Ver mais ofertas"}
               </button>
             </div>
 
-            <ProductSpecs specs={product.specs} />
+            {/* Technical Specifications Section */}
+            <section className="mt-8">
+              <h2 className="text-2xl font-bold mb-4 text-gray-900">
+                Especificações Técnicas
+              </h2>
+              <div className="prose max-w-none text-gray-900">
+                <ProductSpecs specs={product.specs} />
+              </div>
+            </section>
           </div>
         </div>
 
