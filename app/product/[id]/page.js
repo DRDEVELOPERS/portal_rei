@@ -102,13 +102,13 @@ export default function Product() {
               <button
                 onClick={handleCartAction}
                 className={`
-                  flex-1 text-white py-3 px-8 rounded-full cursor-pointer 
-                  ${
-                    cart.isItemAdded
-                      ? "bg-[#e9a321] hover:bg-[#bf851a]"
-                      : "bg-[#3498C9] hover:bg-[#0054A0]"
-                  } transition-colors duration-200 font-semibold
-                `}
+      flex-1 text-white py-3 px-8 rounded-full cursor-pointer 
+      ${
+        cart.isItemAdded
+          ? "bg-[#e9a321] hover:bg-[#bf851a]"
+          : "bg-[#3498C9] hover:bg-[#0054A0]"
+      } transition-colors duration-200 font-semibold
+    `}
               >
                 {cart.isItemAdded
                   ? "Remover do Carrinho"
@@ -119,11 +119,22 @@ export default function Product() {
                 <button
                   onClick={() => router.push("/cart")}
                   className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 md:px-8 rounded-full 
-                    transition-colors duration-200 font-semibold flex items-center justify-center gap-2 whitespace-nowrap"
+        transition-colors duration-200 font-semibold flex items-center justify-center gap-2 whitespace-nowrap"
                 >
                   Ver Carrinho ({cart.cartCount()})
                 </button>
               )}
+
+              {/* New Orange Button */}
+              <button
+                onClick={() => router.push("/")}
+                className={`flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 px-8 rounded-full 
+      transition-colors duration-200 font-semibold ${
+        cart.isItemAdded ? "" : "mt-4"
+      }`}
+              >
+                {cart.isItemAdded ? "Continuar Comprando" : "Ver mais ofertas"}
+              </button>
             </div>
 
             <ProductSpecs specs={product.specs} />
