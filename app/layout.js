@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/user";
 import CartProvider from "./context/cart";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 export const metadata = {
   title: "Portal Ferragem",
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
       <body>
         <ToastContainer />
         <div>
-          <UserProvider>
-            <CartProvider>{children}</CartProvider>
-          </UserProvider>
+          <ErrorBoundary>
+            <UserProvider>
+              <CartProvider>{children}</CartProvider>
+            </UserProvider>
+          </ErrorBoundary>
         </div>
       </body>
     </html>

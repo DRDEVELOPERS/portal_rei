@@ -9,19 +9,26 @@ import { BiLoader } from "react-icons/bi";
 export default function SimilarProducts() {
   const [products, setProducts] = useState([]);
 
-  const getRandomProducts = async () => {
-    try {
-      const response = await fetch("/api/products/get-random");
-      const result = await response.json();
-      setProducts(result || []);
-    } catch (error) {
-      console.log(error);
-      alert(error);
-    }
-  };
-
   useEffect(() => {
+    let isMounted = true;
+
+    const getRandomProducts = async () => {
+      try {
+        const response = await fetch("/api/products/get-random");
+        if (!isMounted) return;
+
+        const result = await response.json();
+        if (isMounted) setProducts(result || []);
+      } catch (error) {
+        if (isMounted) console.log(error);
+      }
+    };
+
     getRandomProducts();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
