@@ -8,7 +8,8 @@ export function useViewedProductTracking(productId) {
     if (!productId) return;
 
     const updateViewedProducts = () => {
-      const viewed = JSON.parse(localStorage.getItem("recentlyViewed") || []);
+      // Fix: Use empty array string as default
+      const viewed = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
 
       // Remove if already exists
       const filtered = viewed.filter((id) => id !== productId.toString());
