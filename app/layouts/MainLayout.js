@@ -2,16 +2,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import TopMenu from "./includes/TopMenu";
 import MainHeader from "./includes/MainHeader";
+import MobileHeader from "./includes/MobileHeader";
 import SubMenu from "./includes/SubMenu";
 import Footer from "./includes/Footer";
 import Loading from "../components/Loading";
-
-const MobileMenu = dynamic(() => import("./includes/MobileMenu"), {
-  ssr: false,
-});
 
 export default function MainLayout({ children }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,16 +29,14 @@ export default function MainLayout({ children }) {
       {/* Gradient Accent Bar */}
       <div className="h-5.5 bg-gradient-to-r from-yellow-400 to-yellow-300 w-full" />
 
-      {/* Desktop Header */}
+      {/* Mobile Header (contains MobileMenu internally) */}
+      <MobileHeader />
+
+      {/* Desktop Header Structure */}
       <div className="hidden md:block">
         <TopMenu />
         <MainHeader />
         <SubMenu />
-      </div>
-
-      {/* Mobile Menu */}
-      <div className="md:hidden">
-        <MobileMenu />
       </div>
 
       <main className="flex-1">{children}</main>

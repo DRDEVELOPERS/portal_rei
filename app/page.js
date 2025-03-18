@@ -16,6 +16,7 @@ import InspirationGallery from "./components/sections/InspirationGallery";
 import CategoryShowcase from "./components/sections/CategoryShowcase";
 import useIsLoading from "./hooks/useIsLoading";
 import TopHeader from "./layouts/includes/TopHeader";
+import RecentlyViewed from "./components/sections/RecentlyViewed";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -52,6 +53,7 @@ export default function Home() {
         <NewsletterSection />
         <InspirationGallery />
         <CategoryShowcase products={products} />
+        <RecentlyViewed products={products} />
       </div>
     </MainLayout>
   );

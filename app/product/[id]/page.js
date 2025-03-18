@@ -2,15 +2,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import MainLayout from "../../layouts/MainLayout";
 import SimilarProducts from "../../components/SimilarProducts";
 import useIsLoading from "../../hooks/useIsLoading";
 import { useCart } from "@/app/context/cart";
 import { toast } from "react-toastify";
-import { useParams } from "next/navigation";
 import ProductSpecs from "@/app/components/product/productSpecs";
 import RatingStars from "@/app/components/product/ratingStars";
+import { useViewedProductTracking } from "@/app/hooks/useViewedProducts";
 
 export default function Product() {
   const router = useRouter();
@@ -19,6 +19,8 @@ export default function Product() {
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
+
+  useViewedProductTracking(id);
 
   const getProductData = async () => {
     useIsLoading(true);
