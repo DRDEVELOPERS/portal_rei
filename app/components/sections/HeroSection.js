@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[500px] md:h-[600px] w-full overflow-hidden flex justify-center items-center">
+    <section className="relative h-[500px] md:h-[600px] w-full overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-primary-black/90 to-transparent z-10" />
       <Image
         src="/images/hero-tools.jpg"
@@ -16,8 +16,8 @@ export default function HeroSection() {
         priority
         sizes="(max-width: 768px) 100vw, 80vw"
       />
-      <div className="relative z-20 h-full flex items-center justify-center w-full">
-        <div className="container mx-auto px-4">
+      <div className="relative z-20 h-full flex items-center justify-center">
+        <div className="max-w-7xl w-full px-4">
           <div className="max-w-2xl mx-auto text-center space-y-4 md:space-y-6">
             <h1 className="text-4xl md:text-6xl font-black text-primary-yellow drop-shadow-xl">
               Ferramentas Profissionais
