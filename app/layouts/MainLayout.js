@@ -35,7 +35,7 @@ export default function MainLayout({ children }) {
       {/* Desktop Header Structure */}
       <div className="hidden md:block">
         <TopMenu />
-        <MainHeader />
+        {/* <MainHeader /> */}
         <SubMenu />
       </div>
 
