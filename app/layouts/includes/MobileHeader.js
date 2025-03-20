@@ -27,7 +27,7 @@ export default function MobileHeader() {
   }, 500);
 
   return (
-    <div className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
+    <div className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 relative z-50">
       <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
 
       {/* Mobile Header */}

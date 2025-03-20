@@ -3,8 +3,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { FiX, FiUser, FiShoppingCart, FiBox, FiLogOut } from "react-icons/fi";
-import { BsChevronDown, BsBoxSeam, BsHeadset } from "react-icons/bs";
+import { FiX, FiUser, FiShoppingCart } from "react-icons/fi";
 import { useUser } from "@/app/context/user";
 import { useCart } from "@/app/context/cart";
 import { AiOutlineUser } from "react-icons/ai";
@@ -19,6 +18,14 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
     return () => window.removeEventListener("routechange", handleRouteChange);
   }, [setIsOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
+
   const menuItems = [
     { id: 1, name: "Home", href: "/" },
     { id: 2, name: "Ofertas", href: "/deals" },
@@ -30,19 +37,22 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
 
   return (
     <>
+      {/* Dark overlay */}
       <div
-        className={`fixed inset-0 z-[999] bg-black/50 transition-all duration-300 ${
+        className={`fixed inset-0 z-[999] bg-black/50 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
       />
 
+      {/* Vertical left-side menu */}
       <aside
-        className={`fixed left-0 top-0 z-[1000] h-full w-64 bg-[#1a365d] shadow-xl transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 z-[1000]  w-[280px] bg-[#1a365d] shadow-xl transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-[#2d4a7a]">
+        {/* Header with logo */}
+        <div className="flex items-center justify-between p-4 border-b border-[#2d4a7a] bg-[#1a365d]">
           <Link href="/" onClick={() => setIsOpen(false)}>
             <img
               src="/images/logo.svg"
@@ -58,8 +68,9 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
           </button>
         </div>
 
-        <nav className="p-4 flex flex-col justify-between h-[calc(100%-72px)]">
-          <div>
+        {/* Scrollable content area */}
+        <nav className="p-4 flex flex-col justify-between h-[calc(100%-72px)] bg-[#1a365d] overflow-y-auto">
+          <div className="space-y-4">
             {/* User Section */}
             <div className="mb-4">
               {user?.id ? (
@@ -88,7 +99,7 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
               )}
             </div>
 
-            {/* Main Menu Items */}
+            {/* Menu Items */}
             <ul className="space-y-2">
               {menuItems.map((item) => (
                 <li key={item.id}>
@@ -118,7 +129,7 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
           </div>
 
           {/* Bottom Section */}
-          <div className="mt-4 pt-4 border-t border-[#2d4a7a]">
+          <div className="p-4 border-t border-[#2d4a7a] bg-[#1a365d] sticky bottom-0">
             <div className="mb-4 p-4 bg-[#2d4a7a] rounded-lg">
               <h3 className="text-white text-sm font-semibold mb-2">
                 PORTALFERRAGEM.shop
@@ -128,7 +139,7 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
               </button>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-[#2d4a7a]">
+            <div className="pt-4 border-t border-[#2d4a7a]">
               <p className="text-blue-200 text-sm text-center">
                 Entrega Rápida para todo Brasil!
               </p>
