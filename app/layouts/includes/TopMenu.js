@@ -66,7 +66,7 @@ export default function TopMenu() {
     <div className="hidden md:block">
       <div
         id="TopMenu"
-        className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 dark:border-gray-800 shadow-sm"
+        className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 dark:border-gray-800 shadow-sm relative z-[500]"
       >
         <div className="flex items-center justify-between w-full mx-auto max-w-7xl px-4">
           <ul

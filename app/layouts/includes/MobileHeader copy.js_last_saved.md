@@ -26,18 +26,6 @@ export default function MobileHeader() {
     console.log(event.target.value);
   }, 500);
 
-  const getInitials = () => {
-    if (!user) return "";
-    const name = user.name || user.email || "";
-    const parts = name.trim().split(/\s+/);
-
-    if (parts.length === 0) return "";
-    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
-    return `${parts[0].charAt(0)}${parts[parts.length - 1].charAt(
-      0
-    )}`.toUpperCase();
-  };
-
   return (
     <div className="border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 relative z-50">
       <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
@@ -84,17 +72,11 @@ export default function MobileHeader() {
                 )}
               </div>
               {user?.id ? (
-                user.picture ? (
-                  <img
-                    src={user.picture}
-                    className="w-8 h-8 rounded-full border-2 border-primary-yellow"
-                    alt="User avatar"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full border-2 border-primary-yellow bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {getInitials()}
-                  </div>
-                )
+                <img
+                  src={user.picture}
+                  className="w-8 h-8 rounded-full border-2 border-primary-yellow"
+                  alt="User avatar"
+                />
               ) : (
                 <div
                   className="cursor-pointer"
@@ -127,8 +109,8 @@ export default function MobileHeader() {
                 onChange={handleSearchName}
                 placeholder="Pesquisar..."
                 type="text"
-                className="w-full bg-transparent placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none"
-                // className="text-primary-yellow"
+                // className="w-full bg-transparent placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none"
+                className="text-primary-yellow"
               />
             </div>
           </div>
