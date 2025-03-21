@@ -3,7 +3,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
+import { BsBoxSeam } from "react-icons/bs";
 import {
   AiOutlineSearch,
   AiOutlineShoppingCart,
@@ -21,6 +22,7 @@ export default function MobileHeader() {
   const user = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const handleSearchName = debounce((event) => {
     console.log(event.target.value);
@@ -30,7 +32,6 @@ export default function MobileHeader() {
     if (!user) return "";
     const name = user.name || user.email || "";
     const parts = name.trim().split(/\s+/);
-
     if (parts.length === 0) return "";
     if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
     return `${parts[0].charAt(0)}${parts[parts.length - 1].charAt(
@@ -83,18 +84,73 @@ export default function MobileHeader() {
                   </div>
                 )}
               </div>
+
+              {/* User Dropdown Section */}
               {user?.id ? (
-                user.picture ? (
-                  <img
-                    src={user.picture}
-                    className="w-8 h-8 rounded-full border-2 border-primary-yellow"
-                    alt="User avatar"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full border-2 border-primary-yellow bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {getInitials()}
-                  </div>
-                )
+                <div className="relative">
+                  <button
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2"
+                  >
+                    {user.picture ? (
+                      <img
+                        src={user.picture}
+                        className="w-8 h-8 rounded-full border-2 border-primary-yellow"
+                        alt="User avatar"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full border-2 border-primary-yellow bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {getInitials()}
+                      </div>
+                    )}
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {isUserMenuOpen && (
+                    <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-100 dark:border-gray-800 z-50">
+                      <div className="p-4 border-b dark:border-gray-800">
+                        <div className="text-sm font-medium text-primary-black dark:text-gray-300">
+                          {user.name}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                          {user.email}
+                        </div>
+                      </div>
+                      <ul className="p-2 space-y-1">
+                        <li>
+                          <Link
+                            href="/orders"
+                            className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md text-sm"
+                            onClick={() => setIsUserMenuOpen(false)}
+                          >
+                            <BsBoxSeam className="w-4 h-4" />
+                            Meus Pedidos
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/profile"
+                            className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md text-sm"
+                            onClick={() => setIsUserMenuOpen(false)}
+                          >
+                            <AiOutlineUser className="w-4 h-4" />
+                            Meu Perfil
+                          </Link>
+                        </li>
+                        <li
+                          onClick={() => {
+                            user.signOut();
+                            setIsUserMenuOpen(false);
+                          }}
+                          className="flex items-center gap-2 p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md text-sm text-red-500 cursor-pointer"
+                        >
+                          <FiLogOut className="w-4 h-4" />
+                          Sair
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <div
                   className="cursor-pointer"
@@ -128,7 +184,6 @@ export default function MobileHeader() {
                 placeholder="Pesquisar..."
                 type="text"
                 className="w-full bg-transparent placeholder-gray-500 dark:placeholder-gray-400 text-sm focus:outline-none"
-                // className="text-primary-yellow"
               />
             </div>
           </div>
