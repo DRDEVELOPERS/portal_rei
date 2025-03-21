@@ -17,7 +17,6 @@ import CategoryShowcase from "./components/sections/CategoryShowcase";
 import useIsLoading from "./hooks/useIsLoading";
 import TopHeader from "./layouts/includes/TopHeader";
 import RecentlyViewed from "./components/sections/RecentlyViewed";
-import ComboSection from "./components/sections/ComboSection";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -51,7 +50,6 @@ export default function Home() {
         <BrandShowcase />
         <FlashDeals products={products} />
         <SeasonalPromotion />
-        <ComboSection />
         <NewsletterSection />
         <InspirationGallery />
         <CategoryShowcase products={products} />
