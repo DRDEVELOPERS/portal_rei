@@ -39,7 +39,7 @@ export default function MainLayout({ children }) {
         <SubMenu />
       </div>
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 relative z-10">{children}</main>
 
       <Footer />
     </div>
