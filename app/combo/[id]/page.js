@@ -28,6 +28,7 @@ export default function Combo() {
     try {
       const [comboRes, reviewsRes] = await Promise.all([
         fetch(`/api/combo/${id}`),
+        fetch("/api/combos"), // plural
         fetch(`/api/reviews/${id}`),
       ]);
 
@@ -245,16 +246,7 @@ export default function Combo() {
               </button>
 
               <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch("/api/combos");
-                    const combos = await res.json();
-                    // Implement logic to show combos in modal
-                    setIsModalOpen(true);
-                  } catch (error) {
-                    toast.error("Erro ao carregar outros combos");
-                  }
-                }}
+                onClick={() => setIsModalOpen(true)}
                 className="flex-1 bg-yellow-400 text-green-900 py-3 px-8 rounded-full hover:bg-yellow-500 transition-colors duration-200 font-semibold"
               >
                 Ver Mais Combos
