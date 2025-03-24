@@ -100,11 +100,12 @@ async function seedDatabase() {
           rating: 5,
           comment: "Excelente esmerilhadeira!",
         },
+        // Valid product review only
         {
-          productId: combo1.id,
+          productId: product2.id,
           userId: "user-002",
           rating: 4,
-          comment: "Kit completo com bom desconto!",
+          comment: "Ótimas chaves!",
         },
       ],
     });

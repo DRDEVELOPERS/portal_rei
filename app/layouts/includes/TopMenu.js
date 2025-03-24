@@ -34,7 +34,7 @@ export default function TopMenu() {
           <div className="relative">
             <img
               width={32}
-              src={user?.picture}
+              src={user?.picture || "https://placehold.co/30"}
               className="rounded-full border-2 border-primary-yellow transition-transform group-hover:scale-105"
               alt="Foto do perfil"
             />
@@ -90,7 +90,7 @@ export default function TopMenu() {
                   <div className="flex items-center gap-3">
                     <img
                       width={48}
-                      src={user?.picture}
+                      src={user?.picture || "https://placehold.co/40"}
                       className="rounded-full border-2 border-primary-yellow"
                       alt="Foto do perfil"
                     />

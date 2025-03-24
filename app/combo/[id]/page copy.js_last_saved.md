@@ -21,6 +21,7 @@ export default function Combo() {
   const [reviews, setReviews] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const getComboData = async () => {
     useIsLoading(true);
@@ -35,9 +36,10 @@ export default function Combo() {
 
       setCombo(comboData);
       setReviews(reviewsData);
-      setProducts(comboData.products?.map((p) => p.product) || []);
+      const comboProducts = comboData.products?.map((p) => p.product) || [];
+      setProducts(comboProducts);
+      setSelectedProduct(comboProducts[0] || null);
 
-      // Fetch suggested products using related IDs from combo data
       if (comboData.suggestedIds?.length) {
         const suggestedRes = await fetch(
           `/api/products?ids=${comboData.suggestedIds.join(",")}`
@@ -51,6 +53,10 @@ export default function Combo() {
     } finally {
       useIsLoading(false);
     }
+  };
+
+  const handleProductSelect = (product) => {
+    setSelectedProduct(product);
   };
 
   const handleAddSuggested = (product) => {
@@ -120,15 +126,75 @@ export default function Combo() {
         </Modal>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {/* Combo Image Section */}
+          {/* Combo Image Section with Product Grid */}
           <div className="bg-white p-6 rounded-xl shadow-lg">
-            <Image
-              src={combo?.imageUrl || "https://placehold.co/400"}
-              alt={combo.title}
-              width={800}
-              height={600}
-              className="w-full rounded-lg h-96 object-contain"
-            />
+            <div className="grid grid-cols-1 gap-6">
+              {/* Main Product Image */}
+              <div className="relative w-full aspect-square">
+                <Image
+                  src={selectedProduct?.url || "https://placehold.co/400"}
+                  alt={selectedProduct?.title || "Produto selecionado"}
+                  fill
+                  className="w-full rounded-lg object-contain"
+                />
+              </div>
+
+              {/* Product Selection Grid */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-green-900">
+                  Produtos do Combo:
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {products.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => handleProductSelect(product)}
+                      className={`relative p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                        product.id === selectedProduct?.id
+                          ? "bg-yellow-50 border-yellow-400"
+                          : "bg-white border-gray-200 hover:border-green-500"
+                      }`}
+                    >
+                      {product.id === selectedProduct?.id && (
+                        <div className="absolute top-2 right-2 bg-yellow-400 text-white px-2 py-1 rounded-full text-xs font-bold">
+                          Selecionado
+                        </div>
+                      )}
+
+                      <div className="relative w-full h-32">
+                        <Image
+                          src={product.url}
+                          alt={product.title}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <h4 className="text-sm font-semibold mt-2 line-clamp-2">
+                        {product.title}
+                      </h4>
+                      <div className="text-green-700 text-sm font-medium mt-1">
+                        {(product.price / 100)?.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </div>
+
+                      {product.id !== selectedProduct?.id && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProductSelect(product);
+                          }}
+                          className="mt-2 w-full text-sm bg-green-100 text-green-800 py-1 rounded-md hover:bg-green-200 transition-colors"
+                        >
+                          Trocar por este
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Combo Details Section */}
@@ -182,15 +248,21 @@ export default function Combo() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <span className="text-green-600">✓</span>
-                  Frete grátis para todo Brasil
+                  <div className="text-green-700 mt-2">
+                    Frete grátis para todo Brasil
+                  </div>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-green-600">✓</span>
-                  12x sem juros no cartão
+                  <div className="text-green-700 mt-2">
+                    12x sem juros no cartão
+                  </div>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-green-600">✓</span>
-                  Garantia extendida de 1 ano
+                  <div className="text-green-700 mt-2">
+                    Garantia extendida de 1 ano
+                  </div>
                 </li>
               </ul>
             </div>

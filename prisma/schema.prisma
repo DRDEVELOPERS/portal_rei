@@ -17,6 +17,7 @@ model Combo {
   discountPercentage Int
   createdAt          DateTime?       @default(now()) @db.Timestamptz(6)
   products           ComboProducts[]
+  Review             Review[]
 
   @@map("combos")
 }
@@ -91,12 +92,14 @@ model Products {
 
 model Review {
   id        Int       @id @default(autoincrement())
-  productId Int       @map("product_id")
+  productId Int?      @map("product_id") // Make optional
+  comboId   Int?      @map("combo_id") // Add combo reference
   userId    String    @map("user_id") @db.Uuid
   rating    Int
   comment   String?
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
-  product   Products  @relation(fields: [productId], references: [id])
+  product   Products? @relation(fields: [productId], references: [id])
+  combo     Combo?    @relation(fields: [comboId], references: [id]) // Add this
 
   @@map("reviews")
 }

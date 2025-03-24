@@ -28,23 +28,15 @@ export default function Combo() {
     try {
       const [comboRes, reviewsRes] = await Promise.all([
         fetch(`/api/combo/${id}`),
+        fetch("/api/combos"), // plural
         fetch(`/api/reviews/${id}`),
       ]);
-
-      // Handle HTTP errors
-      if (!comboRes.ok) throw new Error("Failed to load combo");
-      if (!reviewsRes.ok) throw new Error("Failed to load reviews");
 
       const comboData = await comboRes.json();
       const reviewsData = await reviewsRes.json();
 
-      // Handle API errors
-      if (comboData.error) throw new Error(comboData.error);
-      if (reviewsData.error) throw new Error(reviewsData.error);
-
       setCombo(comboData);
       setReviews(reviewsData);
-
       const comboProducts = comboData.products?.map((p) => p.product) || [];
       setProducts(comboProducts);
       setSelectedProduct(comboProducts[0] || null);
@@ -53,15 +45,12 @@ export default function Combo() {
         const suggestedRes = await fetch(
           `/api/products?ids=${comboData.suggestedIds.join(",")}`
         );
-        if (suggestedRes.ok) {
-          setSuggestedProducts(await suggestedRes.json());
-        }
+        setSuggestedProducts(await suggestedRes.json());
       }
 
       cart.checkIfItemExists(comboData);
     } catch (error) {
-      toast.error(error.message || "Erro ao carregar combo");
-      console.error("Combo loading error:", error);
+      toast.error("Erro ao carregar combo");
     } finally {
       useIsLoading(false);
     }
@@ -245,16 +234,7 @@ export default function Combo() {
               </button>
 
               <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch("/api/combos");
-                    const combos = await res.json();
-                    // Implement logic to show combos in modal
-                    setIsModalOpen(true);
-                  } catch (error) {
-                    toast.error("Erro ao carregar outros combos");
-                  }
-                }}
+                onClick={() => setIsModalOpen(true)}
                 className="flex-1 bg-yellow-400 text-green-900 py-3 px-8 rounded-full hover:bg-yellow-500 transition-colors duration-200 font-semibold"
               >
                 Ver Mais Combos

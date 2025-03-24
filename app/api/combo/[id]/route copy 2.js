@@ -5,7 +5,8 @@ import prisma from "@/lib/prisma";
 export async function GET(request, { params }) {
   try {
     // Properly handle dynamic parameters with await
-    const { id } = await new Promise((resolve) => resolve(params));
+    await Promise.resolve(); // Force async context
+    const { id } = params;
 
     if (!id || isNaN(Number(id))) {
       return NextResponse.json(
