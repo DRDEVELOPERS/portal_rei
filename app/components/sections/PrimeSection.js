@@ -54,7 +54,7 @@ export default function PrimeSection({ products }) {
   }, [isHovered, isTouched]);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 bg-primary-black/50 relative">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 bg-primary-black/50 relative">
       <div className="absolute top-0 left-0 right-0 h-1 bg-primary-yellow"></div>
 
       <div className="mb-8 flex items-center justify-between">

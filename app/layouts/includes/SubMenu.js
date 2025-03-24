@@ -1,8 +1,15 @@
+// app/layouts/includes/SubMenu.js
+
 "use client";
+
+import { useEffect } from "react";
+import Link from "next/link";
+import { useUser } from "@/app/context/user";
+import { useCart } from "@/app/context/cart";
 
 export default function SubMenu() {
   const menuItems = [
-    { id: 1, name: "Home" },
+    { id: 1, name: "Home", href: "/" },
     { id: 2, name: "Todos os Departamentos" },
     { id: 3, name: "Ferramentas" },
     { id: 4, name: "Eletrônicos" },
