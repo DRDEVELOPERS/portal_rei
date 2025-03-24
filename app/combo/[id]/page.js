@@ -87,7 +87,7 @@ export default function Combo() {
   const handleCartAction = () => {
     if (cart.isItemAdded) {
       cart.removeFromCart(combo.id);
-      toast.info("Combo removido do carrinho!");
+      toast.info("Combo removido do carrinho!!");
     } else {
       cart.addToCart({
         ...combo,
