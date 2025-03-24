@@ -27,17 +27,22 @@ export default function Combo() {
   const getComboData = async () => {
     useIsLoading(true);
     try {
-      // Fix: Remove the unnecessary combos fetch
       const [comboRes, reviewsRes] = await Promise.all([
         fetch(`/api/combo/${id}`),
-        fetch(`/api/reviews/${id}`), // Only two fetches now
+        fetch("/api/combos"), // plural
+        fetch(`/api/reviews/${id}`),
       ]);
 
-      if (!comboRes.ok) throw new Error("Falha ao carregar combo");
-      if (!reviewsRes.ok) throw new Error("Falha ao carregar avaliações");
+      // Handle HTTP errors
+      if (!comboRes.ok) throw new Error("Failed to load combo");
+      if (!reviewsRes.ok) throw new Error("Failed to load reviews");
 
       const comboData = await comboRes.json();
       const reviewsData = await reviewsRes.json();
+
+      // Handle API errors
+      if (comboData.error) throw new Error(comboData.error);
+      if (reviewsData.error) throw new Error(reviewsData.error);
 
       setCombo(comboData);
       setReviews(reviewsData);
@@ -46,14 +51,12 @@ export default function Combo() {
       setProducts(comboProducts);
       setSelectedProduct(comboProducts[0] || null);
 
-      // Add safety check for cart context
-      if (cart?.checkIfItemExists) {
-        const exists = cart.checkIfItemExists({
-          id: comboData.id,
-          type: "combo",
-        });
-        setIsItemAdded(exists);
-      }
+      // Update cart check
+      const exists = cart.checkIfItemExists({
+        id: comboData.id,
+        type: "combo",
+      });
+      setIsItemAdded(exists);
 
       if (comboData.suggestedIds?.length) {
         const suggestedRes = await fetch(
@@ -63,6 +66,8 @@ export default function Combo() {
           setSuggestedProducts(await suggestedRes.json());
         }
       }
+
+      cart.checkIfItemExists({ id: comboData.id, type: "combo" });
     } catch (error) {
       toast.error(error.message || "Erro ao carregar combo");
       console.error("Combo loading error:", error);
@@ -84,10 +89,12 @@ export default function Combo() {
     if (id) getComboData();
   }, [id]);
 
+  // Update handleCartAction
   const handleCartAction = () => {
-    if (cart.isItemAdded) {
-      cart.removeFromCart(combo.id);
+    if (isItemAdded) {
+      cart.removeFromCart(combo.id, "combo");
       toast.info("Combo removido do carrinho!");
+      setIsItemAdded(false);
     } else {
       cart.addToCart({
         ...combo,
@@ -95,6 +102,7 @@ export default function Combo() {
         price: combo.discountedPrice,
       });
       toast.success("Combo adicionado ao carrinho!");
+      setIsItemAdded(true);
     }
   };
 
@@ -240,12 +248,12 @@ export default function Combo() {
               <button
                 onClick={handleCartAction}
                 className={`flex-1 text-white py-3 px-8 rounded-full cursor-pointer ${
-                  cart.isItemAdded
+                  isItemAdded
                     ? "bg-orange-500 hover:bg-orange-600"
                     : "bg-green-700 hover:bg-green-800"
                 } transition-colors duration-200 font-semibold`}
               >
-                {cart.isItemAdded ? "Remover Combo" : "Adicionar Combo"}
+                {isItemAdded ? "Remover Combo" : "Adicionar Combo"}
               </button>
 
               <button

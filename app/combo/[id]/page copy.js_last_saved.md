@@ -22,22 +22,26 @@ export default function Combo() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isItemAdded, setIsItemAdded] = useState(false);
 
   const getComboData = async () => {
     useIsLoading(true);
     try {
-      // Fix: Remove the unnecessary combos fetch
       const [comboRes, reviewsRes] = await Promise.all([
         fetch(`/api/combo/${id}`),
-        fetch(`/api/reviews/${id}`), // Only two fetches now
+        fetch("/api/combos"), // plural
+        fetch(`/api/reviews/${id}`),
       ]);
 
-      if (!comboRes.ok) throw new Error("Falha ao carregar combo");
-      if (!reviewsRes.ok) throw new Error("Falha ao carregar avaliações");
+      // Handle HTTP errors
+      if (!comboRes.ok) throw new Error("Failed to load combo");
+      if (!reviewsRes.ok) throw new Error("Failed to load reviews");
 
       const comboData = await comboRes.json();
       const reviewsData = await reviewsRes.json();
+
+      // Handle API errors
+      if (comboData.error) throw new Error(comboData.error);
+      if (reviewsData.error) throw new Error(reviewsData.error);
 
       setCombo(comboData);
       setReviews(reviewsData);
@@ -45,15 +49,6 @@ export default function Combo() {
       const comboProducts = comboData.products?.map((p) => p.product) || [];
       setProducts(comboProducts);
       setSelectedProduct(comboProducts[0] || null);
-
-      // Add safety check for cart context
-      if (cart?.checkIfItemExists) {
-        const exists = cart.checkIfItemExists({
-          id: comboData.id,
-          type: "combo",
-        });
-        setIsItemAdded(exists);
-      }
 
       if (comboData.suggestedIds?.length) {
         const suggestedRes = await fetch(
@@ -63,6 +58,8 @@ export default function Combo() {
           setSuggestedProducts(await suggestedRes.json());
         }
       }
+
+      cart.checkIfItemExists({ id: comboData.id, type: "combo" });
     } catch (error) {
       toast.error(error.message || "Erro ao carregar combo");
       console.error("Combo loading error:", error);
