@@ -1,4 +1,3 @@
-// app/context/cart.js
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -8,7 +7,6 @@ const Context = createContext();
 
 const Provider = ({ children }) => {
   const router = useRouter();
-  const [isItemAdded, setIsItemAdded] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -23,30 +21,41 @@ const Provider = ({ children }) => {
   const updateLocalStorage = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
     setCartItems(cart);
-    // router.refresh();
+  };
+
+  // New function: Check if item exists in cart
+  const checkIfItemExists = (item) => {
+    return cartItems.some(
+      (cartItem) =>
+        cartItem.id === item.id && cartItem.type === (item.type || "product")
+    );
   };
 
   const addToCart = (product) => {
     let cart = getCart();
-    const existingItem = cart.find((item) => item.id === product.id);
+    const existingItem = cart.find(
+      (item) =>
+        item.id === product.id && item.type === (product.type || "product")
+    );
 
     if (existingItem) {
       cart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === product.id && item.type === (product.type || "product")
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
       );
     } else {
       cart.push({ ...product, quantity: 1 });
     }
 
     updateLocalStorage(cart);
-    isItemAddedToCart(product);
   };
 
-  const updateQuantity = (productId, newQuantity) => {
+  const updateQuantity = (productId, newQuantity, type = "product") => {
     let cart = getCart();
     cart = cart
       .map((item) => {
-        if (item.id === productId) {
+        if (item.id === productId && item.type === type) {
           if (newQuantity < 1) return null;
           return { ...item, quantity: newQuantity };
         }
@@ -57,30 +66,19 @@ const Provider = ({ children }) => {
     updateLocalStorage(cart);
   };
 
-  const removeFromCart = (productId) => {
-    const cart = getCart().filter((item) => item.id !== productId);
+  const removeFromCart = (productId, type = "product") => {
+    const cart = getCart().filter(
+      (item) => !(item.id === productId && item.type === type)
+    );
     updateLocalStorage(cart);
-    setIsItemAdded(false);
-  };
-
-  // const removeFromCart = (product) => {
-  //   let cart = getCart().filter((item) => item.id !== product.id);
-  //   updateLocalStorage(cart);
-  //   isItemAddedToCart(product);
-  // };
-
-  const isItemAddedToCart = (product) => {
-    const cart = getCart();
-    const exists = cart.some((item) => item.id === product.id);
-    setIsItemAdded(exists);
   };
 
   const cartCount = () => {
-    return getCart().reduce((sum, item) => sum + item.quantity, 0);
+    return cartItems.reduce((sum, item) => sum + item.quantity, 0);
   };
 
   const cartTotal = () => {
-    return getCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
+    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
 
   const clearCart = () => {
@@ -88,12 +86,12 @@ const Provider = ({ children }) => {
   };
 
   const exposed = {
-    isItemAdded,
-    getCart: () => cartItems,
+    cartItems,
+    getCart,
     addToCart,
     removeFromCart,
     updateQuantity,
-    isItemAddedToCart,
+    checkIfItemExists, // Added the new function
     cartCount,
     cartTotal,
     clearCart,
