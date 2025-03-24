@@ -174,11 +174,9 @@ export default function TopMenu() {
                     size={26}
                     className="nav-hover transition-transform group-hover:scale-110"
                   />
-                  {/* Added optional chaining for cart */}
-                  {cart?.cartCount() > 0 && (
+                  {cart.cartCount() > 0 && (
                     <div className="absolute -top-1 -right-1 bg-red-500 w-5 h-5 rounded-full text-white flex items-center justify-center text-xs ring-2 ring-white dark:ring-gray-900 animate-pulse">
-                      {/* Added optional chaining here too */}
-                      {cart?.cartCount()}
+                      {cart.cartCount()}
                     </div>
                   )}
                 </div>

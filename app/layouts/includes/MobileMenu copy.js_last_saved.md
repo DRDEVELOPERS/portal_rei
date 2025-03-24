@@ -111,11 +111,9 @@ export default function MobileMenu({ isOpen, setIsOpen }) {
                     {item.name === "Carrinho" && (
                       <div className="relative">
                         <FiShoppingCart className="w-5 h-5 text-yellow-400" />
-                        {/* Added optional chaining for cart */}
-                        {cart?.cartCount() > 0 && (
+                        {cart.cartCount() > 0 && (
                           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center animate-pulse">
-                            {/* Added optional chaining here too */}
-                            {cart?.cartCount()}
+                            {cart.cartCount()}
                           </span>
                         )}
                       </div>

@@ -1,9 +1,10 @@
-// app/layout.js
+//file: app/layout.js
 import "./globals.css";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/user";
-import CartProvider from "./context/cart"; // Changed import path (case-sensitive)
+import CartProvider from "./context/cart";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 export const metadata = {
@@ -13,14 +14,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <body>
         <ToastContainer />
         <div>
           <ErrorBoundary>
             <UserProvider>
-              <CartProvider>{children}</CartProvider>{" "}
-              {/* Now using the correct provider */}
+              <CartProvider>{children}</CartProvider>
             </UserProvider>
           </ErrorBoundary>
         </div>

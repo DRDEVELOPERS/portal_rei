@@ -7,6 +7,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Combo {
+  id                 Int             @id @default(autoincrement())
+  title              String
+  description        String?
+  imageUrl           String
+  originalPrice      Int
+  discountedPrice    Int
+  discountPercentage Int
+  createdAt          DateTime?       @default(now()) @db.Timestamptz(6)
+  products           ComboProducts[]
+
+  @@map("combos")
+}
+
+model ComboProducts {
+  comboId   Int      @map("combo_id")
+  productId Int      @map("product_id")
+  combo     Combo    @relation(fields: [comboId], references: [id])
+  product   Products @relation(fields: [productId], references: [id])
+
+  @@id([comboId, productId])
+  @@map("combo_products")
+}
+
 model Addresses {
   id         Int       @id @default(autoincrement())
   user_id    String    @unique @db.Uuid
@@ -16,6 +40,8 @@ model Addresses {
   city       String
   country    String
   created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("addresses")
 }
 
 model Orders {
@@ -30,6 +56,8 @@ model Orders {
   total      Int
   created_at DateTime?   @default(now()) @db.Timestamptz(6)
   orderItem  OrderItem[]
+
+  @@map("orders")
 }
 
 model OrderItem {
@@ -39,21 +67,24 @@ model OrderItem {
   created_at DateTime? @default(now()) @db.Timestamptz(6)
   order      Orders    @relation(fields: [order_id], references: [id])
   product    Products  @relation(fields: [product_id], references: [id])
+
+  @@map("order_items")
 }
 
 model Products {
-  id          Int         @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   title       String
   description String
   url         String
   price       Int
-  category    String? // New field
-  specs       Json? // New field for technical specifications
-  relatedIds  String? // New field for "Compre junto" products
-  rating      Float? // New field for average rating
-  created_at  DateTime?   @default(now()) @db.Timestamptz(6)
-  reviews     Review[]
+  category    String?
+  specs       Json?
+  relatedIds  String?
+  rating      Float?
+  created_at  DateTime?       @default(now()) @db.Timestamptz(6)
+  combos      ComboProducts[]
   orderItem   OrderItem[]
+  reviews     Review[]
 
   @@map("products")
 }

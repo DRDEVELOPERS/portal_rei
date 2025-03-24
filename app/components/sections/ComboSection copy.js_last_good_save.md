@@ -6,35 +6,51 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
-import { useCart } from "@/app/context/cart";
+
+const DUMMY_COMBOS = [
+  {
+    id: 1,
+    title: "Ferramentas Básicas + Organizador",
+    imageUrl: "/images/combos/toolkit-combo.jpg",
+    products: Array(5).fill({}),
+    originalPrice: 49900,
+    discountedPrice: 39900,
+    discountPercentage: 20,
+  },
+  {
+    id: 2,
+    title: "Kit Pintura Premium",
+    imageUrl: "/images/combos/painting-combo.jpg",
+    products: Array(8).fill({}),
+    originalPrice: 79900,
+    discountedPrice: 59900,
+    discountPercentage: 25,
+  },
+  {
+    id: 3,
+    title: "Kit Jardim Completo",
+    imageUrl: "/images/combos/garden-combo.jpg",
+    products: Array(6).fill({}),
+    originalPrice: 89900,
+    discountedPrice: 69900,
+    discountPercentage: 22,
+  },
+  {
+    id: 4,
+    title: "Kit Elétrica Profissional",
+    imageUrl: "/images/combos/electric-combo.jpg",
+    products: Array(7).fill({}),
+    originalPrice: 129900,
+    discountedPrice: 99900,
+    discountPercentage: 23,
+  },
+];
 
 export default function ComboSection() {
-  const [combos, setCombos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const carouselRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const animationRef = useRef(null);
-  const cart = useCart();
-  const addToCart = cart?.addToCart; // Safe access
-
-  useEffect(() => {
-    const fetchCombos = async () => {
-      try {
-        const response = await fetch("/api/combos");
-        if (!response.ok) throw new Error("Failed to fetch combos");
-        const data = await response.json();
-        setCombos(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCombos();
-  }, []);
 
   const scroll = (scrollOffset) => {
     if (carouselRef.current) {
@@ -75,28 +91,6 @@ export default function ComboSection() {
     animationRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(animationRef.current);
   }, [isHovered, isTouched]);
-
-  if (loading) {
-    return (
-      <div className="text-center py-12 text-white">Carregando combos...</div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-12 text-red-500">
-        Erro ao carregar combos: {error}
-      </div>
-    );
-  }
-
-  if (!combos.length) {
-    return (
-      <div className="text-center py-12 text-white">
-        Nenhum combo disponível no momento
-      </div>
-    );
-  }
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 bg-gradient-to-r from-green-700 to-green-800 relative">
@@ -139,16 +133,16 @@ export default function ComboSection() {
         onTouchEnd={() => setIsTouched(false)}
       >
         <ul className="flex gap-4 px-4 sm:px-0">
-          {[...combos, ...combos, ...combos].map((combo, i) => (
+          {DUMMY_COMBOS.map((combo) => (
             <li
-              key={`${combo.id}-${i}`}
+              key={combo.id}
               className="relative w-[280px] sm:w-80 flex-none group transition-transform duration-300 hover:-translate-y-2 snap-start"
             >
-              <div className="absolute top-20 right-4 z-10 bg-red-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-bold animate-pulse">
+              <div className="absolute top-4 right-4 z-10 bg-red-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-bold animate-pulse">
                 PROMOÇÃO ESPECIAL!
               </div>
 
-              <Link href={`/combo/${combo.id}`} className="block">
+              <Link href="#" className="block">
                 {/* Combo Header */}
                 <div className="flex items-start justify-between bg-yellow-400 rounded-t-lg px-3 sm:px-4 py-2 sm:py-3">
                   <div className="flex-1 pr-2">
@@ -156,7 +150,7 @@ export default function ComboSection() {
                       COMBO IMPERDÍVEL
                     </p>
                     <p className="text-green-900/70 text-[10px] sm:text-xs mt-1">
-                      {combo.products?.length || 0} itens • Economia de{" "}
+                      {combo.products.length} itens • Economia de{" "}
                       {combo.discountPercentage}%
                     </p>
                   </div>
@@ -174,21 +168,9 @@ export default function ComboSection() {
                       fill
                       sizes="(max-width: 640px) 280px, 320px"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      priority={i < 4}
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (!addToCart) return;
-                          addToCart({
-                            ...combo,
-                            type: "combo",
-                            price: combo.discountedPrice,
-                          });
-                        }}
-                        className="bg-yellow-400 text-green-900 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold flex items-center gap-2 hover:bg-yellow-300 transition-colors text-sm sm:text-base"
-                      >
+                      <button className="bg-yellow-400 text-green-900 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold flex items-center gap-2 hover:bg-yellow-300 transition-colors text-sm sm:text-base">
                         <FiShoppingCart className="text-lg" />
                         Comprar Agora
                       </button>
