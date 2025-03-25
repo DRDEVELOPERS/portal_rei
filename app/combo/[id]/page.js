@@ -27,17 +27,51 @@ export default function Combo() {
   const getComboData = async () => {
     useIsLoading(true);
     try {
+      const startTime = Date.now();
+
+      // Adiciona headers de autorização se necessário
+      const headers = {
+        "Content-Type": "application/json",
+        ...(process.env.NEXT_PUBLIC_API_KEY && {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        }),
+      };
+
       // Fix: Remove the unnecessary combos fetch
       const [comboRes, reviewsRes] = await Promise.all([
         fetch(`/api/combo/${id}`),
         fetch(`/api/reviews/${id}`), // Only two fetches now
       ]);
 
-      if (!comboRes.ok) throw new Error("Falha ao carregar combo");
-      if (!reviewsRes.ok) throw new Error("Falha ao carregar avaliações");
+      // if (!comboRes.ok) throw new Error("Falha ao carregar combo");
+      // if (!reviewsRes.ok) throw new Error("Falha ao carregar avaliações");
+
+      if (!comboRes.ok) {
+        console.error("Erro ao carregar combo:", {
+          status: comboRes.status,
+          url: `/api/combo/${id}`,
+          time: `${Date.now() - startTime}ms`,
+        });
+        throw new Error(`Falha ao carregar combo (${comboRes.status})`);
+      }
+
+      if (!reviewsRes.ok) {
+        console.error("Erro ao carregar avaliações:", {
+          status: reviewsRes.status,
+          url: `/api/reviews/${id}`,
+          time: `${Date.now() - startTime}ms`,
+        });
+        throw new Error(`Falha ao carregar avaliações (${reviewsRes.status})`);
+      }
 
       const comboData = await comboRes.json();
       const reviewsData = await reviewsRes.json();
+
+      console.log("Dados carregados com sucesso:", {
+        combo: { id: comboData.id },
+        reviewsCount: reviewsData.length,
+        time: `${Date.now() - startTime}ms`,
+      });
 
       setCombo(comboData);
       setReviews(reviewsData);
