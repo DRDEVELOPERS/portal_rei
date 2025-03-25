@@ -39,12 +39,6 @@ export default function Combo() {
       const comboData = await comboRes.json();
       const reviewsData = await reviewsRes.json();
 
-      console.log("Dados carregados com sucesso:", {
-        combo: { id: comboData.id },
-        reviewsCount: reviewsData.length,
-        time: `${Date.now() - startTime}ms`,
-      });
-
       setCombo(comboData);
       setReviews(reviewsData);
 
