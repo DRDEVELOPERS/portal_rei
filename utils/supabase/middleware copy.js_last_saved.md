@@ -1,9 +1,6 @@
 // utils/supabase/middleware.js
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 export async function middleware(request) {
   let response = NextResponse.next();
@@ -33,26 +30,9 @@ export async function middleware(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Admin route protection
-  if (request.nextUrl.pathname.startsWith("/admin")) {
-    if (!user) {
-      return NextResponse.redirect(new URL("/auth/login", request.url));
-    }
-
-    // Fetch user role from database
-    const dbUser = await prisma.users.findUnique({
-      where: { id: user.id },
-      select: { role: true },
-    });
-
-    if (!dbUser || !["admin", "staff"].includes(dbUser.role)) {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
-  }
-
-  // Existing dashboard protection
+  // Protect dashboard route
   if (!user && request.nextUrl.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   return response;
