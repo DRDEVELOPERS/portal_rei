@@ -12,7 +12,6 @@ import {
   FiSettings,
   FiMenu,
   FiX,
-  FiBox, // Added FiBox icon for products
 } from "react-icons/fi";
 import ClientOnly from "@/components/ClientOnly";
 
@@ -61,7 +60,7 @@ export default function AdminLayout({ children }) {
           <p className="text-sm text-gray-400 mt-1">Controle Total</p>
         </div>
 
-        {/* Navigation - Added Products link */}
+        {/* Navigation */}
         <nav className="space-y-2 flex-1">
           <Link
             href="/admin/dashboard"
@@ -72,14 +71,6 @@ export default function AdminLayout({ children }) {
             Dashboard
           </Link>
           <Link
-            href="/admin/products"
-            className="menu-item"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <FiBox className="menu-icon" />
-            Produtos
-          </Link>
-          <Link
             href="/admin/orders"
             className="menu-item"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -88,7 +79,7 @@ export default function AdminLayout({ children }) {
             Pedidos
           </Link>
           <Link
-            href="/admin/orders"
+            href="/admin/users"
             className="menu-item"
             onClick={() => setIsMobileMenuOpen(false)}
           >
@@ -155,15 +146,11 @@ export default function AdminLayout({ children }) {
           <p className="text-sm text-gray-400 mt-1">Controle Total</p>
         </div>
 
-        {/* Navigation - Added Products link */}
+        {/* Navigation */}
         <nav className="space-y-2 flex-1">
           <Link href="/admin/dashboard" className="menu-item">
             <FiPackage className="menu-icon" />
             Dashboard
-          </Link>
-          <Link href="/admin/products" className="menu-item">
-            <FiBox className="menu-icon" />
-            Produtos
           </Link>
           <Link href="/admin/orders" className="menu-item">
             <FiDollarSign className="menu-icon" />

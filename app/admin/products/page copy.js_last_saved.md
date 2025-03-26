@@ -19,53 +19,18 @@ export default function AdminProducts() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Dummy data for UI testing
-  const dummyProducts = [
-    {
-      id: 1,
-      title: "Furadeira 500W",
-      price: 29990,
-      category: "Ferramentas Elétricas",
-      url: "https://placehold.co/400",
-      rating: 4.5,
-      reviews: [{}, {}, {}], // 3 dummy reviews
-      combos: [{}], // 1 dummy combo
-    },
-    {
-      id: 2,
-      title: "Kit Chaves de Fenda",
-      price: 7990,
-      category: "Ferramentas Manuais",
-      url: "https://placehold.co/400",
-      rating: 4.2,
-      reviews: [{}, {}], // 2 dummy reviews
-      combos: [],
-    },
-    {
-      id: 3,
-      title: "Serra Circular",
-      price: 45990,
-      category: "Ferramentas Elétricas",
-      url: "https://placehold.co/400",
-      rating: null,
-      reviews: [],
-      combos: [{}, {}], // 2 dummy combos
-    },
-  ];
-
   const fetchProducts = async () => {
     setIsLoading(true);
-
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Use dummy data instead of API call
-    const filtered = dummyProducts.filter((product) =>
-      product.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    setProducts(filtered);
-    setIsLoading(false);
+    try {
+      const data = await fetch(`/api/admin/products?query=${searchQuery}`).then(
+        (res) => res.json()
+      );
+      setProducts(data);
+    } catch (error) {
+      toast.error("Erro ao carregar produtos");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
