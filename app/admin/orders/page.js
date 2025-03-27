@@ -93,92 +93,87 @@ export default function AdminOrders() {
   }, [searchQuery, statusFilter, isLoading]);
 
   return (
-    <AdminLayout>
-      <div className="space-y-8">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <h1 className="text-2xl font-bold text-primary-yellow">
-            Gestão de Pedidos
-          </h1>
+    <div className="space-y-8">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <h1 className="text-2xl font-bold text-primary-yellow">
+          Gestão de Pedidos
+        </h1>
 
-          {/* Controls Container */}
-          <div className="flex items-center gap-4 w-full md:w-auto">
-            {/* Search Input */}
-            <div className="relative flex-1">
-              <FiSearch className="absolute left-3 top-3.5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Buscar pedidos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:border-primary-yellow focus:ring-1 focus:ring-primary-yellow transition-colors"
-              />
-            </div>
+        {/* Controls Container */}
+        <div className="flex items-center gap-4 w-full md:w-auto">
+          {/* Search Input */}
+          <div className="relative flex-1">
+            <FiSearch className="absolute left-3 top-3.5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Buscar pedidos..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:border-primary-yellow focus:ring-1 focus:ring-primary-yellow transition-colors"
+            />
+          </div>
 
-            {/* Status Filter */}
-            <div className="relative">
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="btn bg-gray-800 border border-gray-700 flex items-center gap-2 pr-8 appearance-none"
-              >
-                <option value="">Todos Status</option>
-                <option value="Processando">Processando</option>
-                <option value="Entregue">Entregue</option>
-                <option value="Pendente">Pendente</option>
-              </select>
-              <FiFilter className="absolute right-3 top-3.5 pointer-events-none" />
-            </div>
+          {/* Status Filter */}
+          <div className="relative">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="btn bg-gray-800 border border-gray-700 flex items-center gap-2 pr-8 appearance-none"
+            >
+              <option value="">Todos Status</option>
+              <option value="Processando">Processando</option>
+              <option value="Entregue">Entregue</option>
+              <option value="Pendente">Pendente</option>
+            </select>
+            <FiFilter className="absolute right-3 top-3.5 pointer-events-none" />
           </div>
         </div>
-
-        {/* Orders Table Container */}
-        <div className="bg-gray-800 rounded-xl border border-gray-700">
-          {isLoading ? (
-            <OrdersSkeleton />
-          ) : (
-            <div className="overflow-x-auto scrollbar-hide">
-              <table className="w-full">
-                <thead className="bg-gray-900">
-                  <tr>
-                    {[
-                      "Pedido",
-                      "Cliente",
-                      "Produtos",
-                      "Valor Total",
-                      "Status",
-                      "Data",
-                    ].map((header) => (
-                      <th
-                        key={header}
-                        className="text-left py-4 px-6 text-sm text-gray-400"
-                      >
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredOrders.map((order) => (
-                    <OrderRow key={order.id} order={order} />
-                  ))}
-                  {filteredOrders.length === 0 && (
-                    <tr>
-                      <td
-                        colSpan="6"
-                        className="py-6 text-center text-gray-400"
-                      >
-                        Nenhum pedido encontrado
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
       </div>
-    </AdminLayout>
+
+      {/* Orders Table Container */}
+      <div className="bg-gray-800 rounded-xl border border-gray-700">
+        {isLoading ? (
+          <OrdersSkeleton />
+        ) : (
+          <div className="overflow-x-auto scrollbar-hide">
+            <table className="w-full">
+              <thead className="bg-gray-900">
+                <tr>
+                  {[
+                    "Pedido",
+                    "Cliente",
+                    "Produtos",
+                    "Valor Total",
+                    "Status",
+                    "Data",
+                  ].map((header) => (
+                    <th
+                      key={header}
+                      className="text-left py-4 px-6 text-sm text-gray-400"
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrders.map((order) => (
+                  <OrderRow key={order.id} order={order} />
+                ))}
+                {filteredOrders.length === 0 && (
+                  <tr>
+                    <td colSpan="6" className="py-6 text-center text-gray-400">
+                      Nenhum pedido encontrado
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
