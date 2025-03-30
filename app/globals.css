@@ -13,7 +13,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #121825;
   --foreground: #171717;
   --primary-black: #373841;
   --primary-yellow: #FDE037;
@@ -183,4 +183,16 @@ body {
 
 .animate-slideIn {
   animation: slideIn 0.3s ease-out;
+}
+
+.base-input {
+  @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-yellow focus:border-transparent transition-all;
+}
+
+.btn-primary {
+  @apply bg-primary-yellow text-black px-6 py-3 rounded-lg hover:bg-yellow-500 transition-colors;
+}
+
+.data-grid-container {
+  @apply border border-gray-200 rounded-lg overflow-hidden shadow-sm;
 }

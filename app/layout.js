@@ -3,8 +3,8 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/user";
-import CartProvider from "./context/cart"; // Changed import path (case-sensitive)
-import ErrorBoundary from "./components/ErrorBoundary";
+import CartProvider from "./context/cart";
+import ErrorBoundary from "./(consumer)/components/ErrorBoundary";
 
 export const metadata = {
   title: "Portal Ferragem",
