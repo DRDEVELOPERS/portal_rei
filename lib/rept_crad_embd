@@ -1,0 +1,35 @@
+Baixando seus arquivos do dataset...
+/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_auth.py:94: UserWarning: 
+The secret `HF_TOKEN` does not exist in your Colab secrets.
+To authenticate with the Hugging Face Hub, create a token in your settings tab (https://huggingface.co/settings/tokens), set it as secret in your Google Colab and restart your session.
+You will be able to reuse this secret in all of your notebooks.
+Please note that authentication is recommended but still optional to access public models or datasets.
+  warnings.warn(
+categories-flat.json: 
+ 1.64M/? [00:00<00:00, 17.9MB/s]
+marqo-ecommerce-L-cache-crad-K32.npy: 100%
+ 1.73M/1.73M [00:00<00:00, 2.20MB/s]
+Carregadas 13498 categorias
+Carregando modelo Marqo-B (768 dims)...
+open_clip_config.json: 100%
+ 881/881 [00:00<00:00, 51.4kB/s]
+open_clip_model.safetensors: 100%
+ 813M/813M [00:06<00:00, 168MB/s]
+tokenizer_config.json: 
+ 20.6k/? [00:00<00:00, 2.04MB/s]
+tokenizer.json: 
+ 2.42M/? [00:00<00:00, 33.0MB/s]
+special_tokens_map.json: 
+ 2.20k/? [00:00<00:00, 184kB/s]
+Gerando embeddings 768D com Marqo-B (vai levar ~2-4 minutos)...
+Embeddings 768D: 100%|██████████| 13498/13498 [45:35<00:00,  4.93it/s]
+Embeddings gerados: (13498, 768)
+Treinando projeção linear 768 → 32 dims...
+
+PRONTO! Arquivos gerados:
+  - marqo-ecommerce-B-cache-crad-K32-aligned.npy  → 1687 KB
+  - projection_matrix_B_to_32.npy                 → 96 KB
+
+Arquivos baixados! Agora é só fazer upload no seu dataset:
+hf upload eulerLabs/amazon-br-taxonomy-jfactor marqo-ecommerce-B-cache-crad-K32-aligned.npy --repo-type=dataset
+hf upload eulerLabs/amazon-br-taxonomy-jfactor projection_matrix_B_to_32.npy --repo-type=dataset
