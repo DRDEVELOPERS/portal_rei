@@ -1,0 +1,87 @@
+✅ Modelo ViT-B-32 carregado. Dimensão Hidden Atualizada: 512
+🚀 Configurando experimento CRAD...
+✅ Modelo base congelado
+🔄 Pré-computando Hidden States (Input & Target)...
+Processando textos: 100%|██████████| 1000/1000 [00:06<00:00, 158.36it/s]
+✅ 1000/1000 samples processados com sucesso
+✅ CRAD Head inicializado: 16385 parâmetros
+✅ Experimento configurado com sucesso
+🎯 Iniciando treinamento...
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 1/20
+   Loss: 0.871732
+   Similaridade: 0.235216
+📊 Época 2/20
+   Loss: 0.671791
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 3/20
+   Loss: 0.496419
+   Similaridade: 0.585188
+📊 Época 4/20
+   Loss: 0.346702
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 5/20
+   Loss: 0.225915
+   Similaridade: 0.825045
+📊 Época 6/20
+   Loss: 0.137705
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 7/20
+   Loss: 0.079766
+   Similaridade: 0.941450
+📊 Época 8/20
+   Loss: 0.044562
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 9/20
+   Loss: 0.024249
+   Similaridade: 0.982688
+📊 Época 10/20
+   Loss: 0.012964
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 11/20
+   Loss: 0.006871
+   Similaridade: 0.995130
+📊 Época 12/20
+   Loss: 0.003648
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 13/20
+   Loss: 0.001963
+   Similaridade: 0.998581
+📊 Época 14/20
+   Loss: 0.001088
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 15/20
+   Loss: 0.000628
+   Similaridade: 0.999521
+📊 Época 16/20
+   Loss: 0.000387
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 17/20
+   Loss: 0.000258
+   Similaridade: 0.999783
+📊 Época 18/20
+   Loss: 0.000190
+✅ Checkpoint salvo: crad_best_model_K32.pth
+📊 Época 19/20
+   Loss: 0.000154
+   Similaridade: 0.999857
+📊 Época 20/20
+   Loss: 0.000137
+✅ Treinamento concluído
+🔍 Avaliação final...
+📈 RESULTADOS FINAIS:
+   Similaridade Média: 0.999870
+   Melhor Similaridade: 0.999857
+   Loss Final: 0.000137
+🎉 EXCELENTE: Similaridade > 0.99
+
+==================================================
+📋 RELATÓRIO FINAL CRAD COMPRESSION
+==================================================
+Modelo: ViT-B-32
+Dimensão Original: 512D
+Dimensão Comprimida: 32D
+Taxa de Compressão: 93.8%
+Similaridade Final: 0.999870
+Arquivo do Modelo: crad_best_model_K32.pth
+==================================================
