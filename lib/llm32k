@@ -1,0 +1,87 @@
+🔄 Carregando LLM: Qwen/Qwen1.5-7B...
+tokenizer_config.json: 
+ 1.29k/? [00:00<00:00, 116kB/s]
+vocab.json: 
+ 2.78M/? [00:00<00:00, 46.9MB/s]
+merges.txt: 
+ 1.67M/? [00:00<00:00, 55.1MB/s]
+tokenizer.json: 
+ 7.03M/? [00:00<00:00, 16.8MB/s]
+special_tokens_map.json: 100%
+ 295/295 [00:00<00:00, 24.6kB/s]
+config.json: 100%
+ 663/663 [00:00<00:00, 33.7kB/s]
+`torch_dtype` is deprecated! Use `dtype` instead!
+model.safetensors.index.json: 
+ 31.7k/? [00:00<00:00, 1.55MB/s]
+Fetching 4 files: 100%
+ 4/4 [04:54<00:00, 124.85s/it]
+model-00001-of-00004.safetensors: 100%
+ 3.99G/3.99G [04:35<00:00, 7.63MB/s]
+model-00002-of-00004.safetensors: 100%
+ 3.96G/3.96G [04:53<00:00, 219MB/s]
+model-00003-of-00004.safetensors: 100%
+ 3.96G/3.96G [04:52<00:00, 15.9MB/s]
+model-00004-of-00004.safetensors: 100%
+ 3.54G/3.54G [04:46<00:00, 26.7MB/s]
+The following generation flags are not valid and may be ignored: ['output_hidden_states']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Loading checkpoint shards: 100%
+ 4/4 [01:03<00:00, 15.63s/it]
+generation_config.json: 100%
+ 138/138 [00:00<00:00, 15.4kB/s]
+✅ LLM carregado. Hidden Dim: 4096
+🚀 Configurando experimento CRAD LLM...
+✅ Modelo LLM base congelado
+🔄 Pré-computando Hidden States (Input & Target) do LLM...
+Processando batches LLM: 100%|██████████| 125/125 [01:31<00:00,  1.36it/s]
+✅ 1000/1000 samples processados com sucesso
+✅ CRAD Head inicializado: 1,048,577 parâmetros
+✅ Experimento configurado com sucesso
+🎯 Iniciando treinamento...
+✅ Checkpoint salvo: crad_best_model_K256_LLM.pth
+📊 Época 1/10
+   Loss: 0.447016
+   Similaridade: 0.830198
+📊 Época 2/10
+   Loss: 0.143151
+✅ Checkpoint salvo: crad_best_model_K256_LLM.pth
+📊 Época 3/10
+   Loss: 0.136674
+   Similaridade: 0.865010
+📊 Época 4/10
+   Loss: 0.136685
+📊 Época 5/10
+   Loss: 0.136740
+   Similaridade: 0.864552
+📊 Época 6/10
+   Loss: 0.137246
+✅ Checkpoint salvo: crad_best_model_K256_LLM.pth
+📊 Época 7/10
+   Loss: 0.136927
+   Similaridade: 0.867211
+📊 Época 8/10
+   Loss: 0.136495
+✅ Checkpoint salvo: crad_best_model_K256_LLM.pth
+📊 Época 9/10
+   Loss: 0.136417
+   Similaridade: 0.867305
+📊 Época 10/10
+   Loss: 0.136057
+✅ Treinamento concluído
+🔍 Avaliação final...
+📈 RESULTADOS FINAIS:
+   Similaridade Média: 0.866899
+   Melhor Similaridade: 0.867305
+   Loss Final: 0.136057
+⚠️ BOM: Similaridade > 0.95.
+
+==================================================
+📋 RELATÓRIO FINAL CRAD COMPRESSION LLM
+==================================================
+Modelo: Qwen/Qwen1.5-7B
+Dimensão Original: 4096D
+Dimensão Comprimida: 256D
+Taxa de Compressão: 93.8%
+Similaridade Final: 0.866899
+Arquivo do Modelo: crad_best_model_K256_LLM.pth
+==================================================
