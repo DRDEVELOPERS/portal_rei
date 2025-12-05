@@ -1,3 +1,39 @@
+✅ Token Hugging Face configurado a partir do segredo do Colab[citation:3].
+Carregando dataset GLUE-QQP...
+Usando dispositivo: cuda
+Gerando Embeddings do Corpus (384D, Float32)...
+Batches: 100%
+ 79/79 [00:00<00:00, 93.77it/s]
+Batches: 100%
+ 79/79 [00:01<00:00, 93.29it/s]
+Dimensões do Corpus: torch.Size([10000, 384])
+Treinando CRAD no Dataset Completo...
+ 10%|█         | 1/10 [00:00<00:01,  5.22it/s]Epoch 1/10, Loss: 0.0025
+ 20%|██        | 2/10 [00:00<00:01,  5.22it/s]Epoch 2/10, Loss: 0.0020
+ 30%|███       | 3/10 [00:00<00:01,  5.20it/s]Epoch 3/10, Loss: 0.0018
+ 40%|████      | 4/10 [00:00<00:01,  5.19it/s]Epoch 4/10, Loss: 0.0016
+ 50%|█████     | 5/10 [00:00<00:00,  5.22it/s]Epoch 5/10, Loss: 0.0015
+ 60%|██████    | 6/10 [00:01<00:00,  5.22it/s]Epoch 6/10, Loss: 0.0015
+ 70%|███████   | 7/10 [00:01<00:00,  5.24it/s]Epoch 7/10, Loss: 0.0014
+ 80%|████████  | 8/10 [00:01<00:00,  5.24it/s]Epoch 8/10, Loss: 0.0014
+ 90%|█████████ | 9/10 [00:01<00:00,  5.23it/s]Epoch 9/10, Loss: 0.0013
+100%|██████████| 10/10 [00:01<00:00,  5.22it/s]Epoch 10/10, Loss: 0.0013
+
+✅ Modelo CRAD salvo em: /content/drive/MyDrive/crad_model/crad_model.pth
+/tmp/ipython-input-1127698240.py:119: UserWarning: # 'dynamic_axes' is not recommended when dynamo=True, and may lead to 'torch._dynamo.exc.UserError: Constraints violated.' Supply the 'dynamic_shapes' argument instead if export is unsuccessful.
+  torch.onnx.export(
+W1203 17:06:53.335000 226 torch/onnx/_internal/exporter/_compat.py:114] Setting ONNX exporter to use operator set version 18 because the requested opset_version 14 is a lower version than we have implementations for. Automatic version conversion will be performed, which may not be successful at converting to the requested version. If version conversion is unsuccessful, the opset version of the exported model will be kept at 18. Please consider setting opset_version >=18 to leverage latest ONNX features
+[torch.onnx] Obtain model graph for `Sequential([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `Sequential([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decomposition...
+WARNING:onnxscript.version_converter:The model version conversion is not supported by the onnxscript version converter and fallback is enabled. The model will be converted using the onnx C API (target version: 14).
+[torch.onnx] Run decomposition... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+✅ Modelo ONNX exportado: /content/drive/MyDrive/crad_model/crad_encoder.onnx
+✅ ONNX Runtime Session inicializada para verificação.
+
+
 ================================================================================
 BENCHMARK COMPARATIVO - CRAD vs BASELINES
 ================================================================================
