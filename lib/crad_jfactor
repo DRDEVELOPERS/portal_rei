@@ -1,1 +1,1739 @@
-###dead
+=========================================
+🚀 EXECUTANDO EXPERIMENTO PAULGRAHAM PASSKEY
+=========================================
+Método:      baseline
+Configuração: 20480words_10x10x3_7digits
+Modelo:      mistral-7b-instruct-v0.2
+Saída:       ./results
+=========================================
+The token has not been saved to the git credentials helper. Pass `add_to_git_credential=True` in this function directly or `--add-to-git-credential` if using via `huggingface-cli` if you want to set the git credential as well.
+Token is valid (permission: write).
+Your token has been saved to /root/.cache/huggingface/token
+Login successful
+/usr/local/lib/python3.12/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+2025-12-14 17:52:55.103556: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-12-14 17:52:55.127397: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1765734775.151514   67613 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1765734775.158577   67613 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1765734775.178030   67613 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1765734775.178079   67613 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1765734775.178082   67613 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1765734775.178086   67613 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-12-14 17:52:55.183647: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-12-14 11:53:02,433 | INFO : Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad (SEED=42) started at 2025-12-14 11:53:02.431877-06:00 with the following config: 
+INFO:main:Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad (SEED=42) started at 2025-12-14 11:53:02.431877-06:00 with the following config: 
+2025-12-14 11:53:02,434 | INFO : {
+    "pipeline_params": {
+        "model_name": "mistralai/Mistral-7B-Instruct-v0.2",
+        "tokenizer_name": "mistralai/Mistral-7B-Instruct-v0.2",
+        "chat_template": "mistral_instruct",
+        "model_max_len": 32000,
+        "fattn": true,
+        "use_flash_attn": true,
+        "truncation_mode": null,
+        "batch_size": 1,
+        "out_of_max_len_allowed": true,
+        "base": 1000000,
+        "rope_theta_factor": 1.0,
+        "method": "baseline",
+        "token_budget": 4096,
+        "compressed_size": 256,
+        "alpha": 1.0,
+        "scdq_mode": false
+    },
+    "eval_params": {
+        "dataset": "passkey_retrieval",
+        "task_desc": "Mohtashami_Jaggi_NeurIPS23_GrassSkySun",
+        "background_dir": "eval/passkey_utils/background/PaulGrahamEssays",
+        "background_filling_style": "ordered_repetition",
+        "background_len_min": 512,
+        "background_len_max": 20480,
+        "n_background_lens": 10,
+        "depth_min": 0,
+        "depth_max": 1,
+        "n_depths": 10,
+        "depth_num_iterations": 3,
+        "max_new_tokens": 128,
+        "instruction": "There is an important info hidden inside a lot of irrelevant text. Find it and memorize it. I will quiz you about the important information there.\n",
+        "instruction_position": "prefix",
+        "retrieval_target_len": 7,
+        "retrieval_target_style": "int",
+        "retrieval_target_template": "The pass key is <PASS KEY>. Remember it. <PASS KEY> is the pass key.",
+        "retrieval_target_placeholder": "<PASS KEY>",
+        "retrieval_target_wrapper": "naked",
+        "retrieval_question": "\nWhat is the pass key? The pass key is ",
+        "eval_metrics": [
+            "exact_match",
+            "partial_match"
+        ]
+    },
+    "eval_results": {},
+    "management": {
+        "exp_desc": "paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad",
+        "pipeline_config_dir": "config/pipeline_config/paulgraham_passkey/mistral-7b-instruct-v0.2.json",
+        "eval_config_dir": "config/eval_config/paulgraham_passkey/20480words_10x10x3_7digits.json",
+        "output_folder_dir": "results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/",
+        "job_post_via": "slurm_sbatch",
+        "sub_dir": {
+            "input_config": "input_config/",
+            "raw_results": "raw_results.json",
+            "result_vis": "result_vis.png",
+            "output_config": "output_config.json"
+        },
+        "slurm_info": {
+            "slurm_job_id": "N/A",
+            "slurm_job_name": "N/A",
+            "slurm_out_file_dir": "./slurm-N/A.out",
+            "slurm_submit_dir": "."
+        }
+    }
+}
+INFO:main:{
+    "pipeline_params": {
+        "model_name": "mistralai/Mistral-7B-Instruct-v0.2",
+        "tokenizer_name": "mistralai/Mistral-7B-Instruct-v0.2",
+        "chat_template": "mistral_instruct",
+        "model_max_len": 32000,
+        "fattn": true,
+        "use_flash_attn": true,
+        "truncation_mode": null,
+        "batch_size": 1,
+        "out_of_max_len_allowed": true,
+        "base": 1000000,
+        "rope_theta_factor": 1.0,
+        "method": "baseline",
+        "token_budget": 4096,
+        "compressed_size": 256,
+        "alpha": 1.0,
+        "scdq_mode": false
+    },
+    "eval_params": {
+        "dataset": "passkey_retrieval",
+        "task_desc": "Mohtashami_Jaggi_NeurIPS23_GrassSkySun",
+        "background_dir": "eval/passkey_utils/background/PaulGrahamEssays",
+        "background_filling_style": "ordered_repetition",
+        "background_len_min": 512,
+        "background_len_max": 20480,
+        "n_background_lens": 10,
+        "depth_min": 0,
+        "depth_max": 1,
+        "n_depths": 10,
+        "depth_num_iterations": 3,
+        "max_new_tokens": 128,
+        "instruction": "There is an important info hidden inside a lot of irrelevant text. Find it and memorize it. I will quiz you about the important information there.\n",
+        "instruction_position": "prefix",
+        "retrieval_target_len": 7,
+        "retrieval_target_style": "int",
+        "retrieval_target_template": "The pass key is <PASS KEY>. Remember it. <PASS KEY> is the pass key.",
+        "retrieval_target_placeholder": "<PASS KEY>",
+        "retrieval_target_wrapper": "naked",
+        "retrieval_question": "\nWhat is the pass key? The pass key is ",
+        "eval_metrics": [
+            "exact_match",
+            "partial_match"
+        ]
+    },
+    "eval_results": {},
+    "management": {
+        "exp_desc": "paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad",
+        "pipeline_config_dir": "config/pipeline_config/paulgraham_passkey/mistral-7b-instruct-v0.2.json",
+        "eval_config_dir": "config/eval_config/paulgraham_passkey/20480words_10x10x3_7digits.json",
+        "output_folder_dir": "results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/",
+        "job_post_via": "slurm_sbatch",
+        "sub_dir": {
+            "input_config": "input_config/",
+            "raw_results": "raw_results.json",
+            "result_vis": "result_vis.png",
+            "output_config": "output_config.json"
+        },
+        "slurm_info": {
+            "slurm_job_id": "N/A",
+            "slurm_job_name": "N/A",
+            "slurm_out_file_dir": "./slurm-N/A.out",
+            "slurm_submit_dir": "."
+        }
+    }
+}
+2025-12-14 11:53:02,434 | INFO : Evaluate on background_lens: [512, 2730, 4949, 7168, 9386, 11605, 13824, 16042, 18261, 20480]
+INFO:main:Evaluate on background_lens: [512, 2730, 4949, 7168, 9386, 11605, 13824, 16042, 18261, 20480]
+2025-12-14 11:53:02,434 | INFO : Evaluate on depths: [0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777778, 0.8888888888888888, 1]
+INFO:main:Evaluate on depths: [0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777778, 0.8888888888888888, 1]
+2025-12-14 11:53:08,868 | INFO : All experiment 300 inputs generated (10 background_lens; 10 depths; 3 iterations for each depth level)
+INFO:main:All experiment 300 inputs generated (10 background_lens; 10 depths; 3 iterations for each depth level)
+2025-12-14 11:53:08,868 | INFO : Starting evaluation via baseline
+INFO:main:Starting evaluation via baseline
+Loading checkpoint shards: 100% 3/3 [00:08<00:00,  2.95s/it]
+2025-12-14 11:53:19,537 | INFO : Longest input (29908 tokens) is below model_max_len (32000 tokens).
+INFO:main:Longest input (29908 tokens) is below model_max_len (32000 tokens).
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2025-12-14 11:53:20,338 | INFO : Finished evaluating batch 1/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 1/300 (batch_size = 1).
+2025-12-14 11:53:20,881 | INFO : Finished evaluating batch 2/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 2/300 (batch_size = 1).
+2025-12-14 11:53:21,571 | INFO : Finished evaluating batch 3/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 3/300 (batch_size = 1).
+2025-12-14 11:53:22,098 | INFO : Finished evaluating batch 4/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 4/300 (batch_size = 1).
+2025-12-14 11:53:22,632 | INFO : Finished evaluating batch 5/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 5/300 (batch_size = 1).
+2025-12-14 11:53:23,178 | INFO : Finished evaluating batch 6/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 6/300 (batch_size = 1).
+2025-12-14 11:53:23,722 | INFO : Finished evaluating batch 7/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 7/300 (batch_size = 1).
+2025-12-14 11:53:24,266 | INFO : Finished evaluating batch 8/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 8/300 (batch_size = 1).
+2025-12-14 11:53:24,796 | INFO : Finished evaluating batch 9/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 9/300 (batch_size = 1).
+2025-12-14 11:53:31,592 | INFO : Finished evaluating batch 10/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 10/300 (batch_size = 1).
+2025-12-14 11:53:38,452 | INFO : Finished evaluating batch 11/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 11/300 (batch_size = 1).
+2025-12-14 11:53:38,989 | INFO : Finished evaluating batch 12/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 12/300 (batch_size = 1).
+2025-12-14 11:53:39,519 | INFO : Finished evaluating batch 13/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 13/300 (batch_size = 1).
+2025-12-14 11:53:40,052 | INFO : Finished evaluating batch 14/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 14/300 (batch_size = 1).
+2025-12-14 11:53:47,059 | INFO : Finished evaluating batch 15/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 15/300 (batch_size = 1).
+2025-12-14 11:53:47,607 | INFO : Finished evaluating batch 16/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 16/300 (batch_size = 1).
+2025-12-14 11:53:48,141 | INFO : Finished evaluating batch 17/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 17/300 (batch_size = 1).
+2025-12-14 11:53:48,675 | INFO : Finished evaluating batch 18/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 18/300 (batch_size = 1).
+2025-12-14 11:53:49,366 | INFO : Finished evaluating batch 19/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 19/300 (batch_size = 1).
+2025-12-14 11:53:49,895 | INFO : Finished evaluating batch 20/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 20/300 (batch_size = 1).
+2025-12-14 11:53:50,589 | INFO : Finished evaluating batch 21/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 21/300 (batch_size = 1).
+2025-12-14 11:53:51,119 | INFO : Finished evaluating batch 22/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 22/300 (batch_size = 1).
+2025-12-14 11:53:51,651 | INFO : Finished evaluating batch 23/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 23/300 (batch_size = 1).
+2025-12-14 11:53:52,182 | INFO : Finished evaluating batch 24/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 24/300 (batch_size = 1).
+2025-12-14 11:53:52,714 | INFO : Finished evaluating batch 25/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 25/300 (batch_size = 1).
+2025-12-14 11:53:53,247 | INFO : Finished evaluating batch 26/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 26/300 (batch_size = 1).
+2025-12-14 11:53:53,777 | INFO : Finished evaluating batch 27/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 27/300 (batch_size = 1).
+2025-12-14 11:53:54,308 | INFO : Finished evaluating batch 28/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 28/300 (batch_size = 1).
+2025-12-14 11:53:54,842 | INFO : Finished evaluating batch 29/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 29/300 (batch_size = 1).
+2025-12-14 11:53:55,376 | INFO : Finished evaluating batch 30/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 30/300 (batch_size = 1).
+2025-12-14 11:53:56,187 | INFO : Finished evaluating batch 31/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 31/300 (batch_size = 1).
+2025-12-14 11:53:56,981 | INFO : Finished evaluating batch 32/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 32/300 (batch_size = 1).
+2025-12-14 11:53:57,795 | INFO : Finished evaluating batch 33/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 33/300 (batch_size = 1).
+2025-12-14 11:53:58,611 | INFO : Finished evaluating batch 34/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 34/300 (batch_size = 1).
+2025-12-14 11:54:00,278 | INFO : Finished evaluating batch 35/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 35/300 (batch_size = 1).
+2025-12-14 11:54:01,079 | INFO : Finished evaluating batch 36/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 36/300 (batch_size = 1).
+2025-12-14 11:54:08,317 | INFO : Finished evaluating batch 37/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 37/300 (batch_size = 1).
+2025-12-14 11:54:15,573 | INFO : Finished evaluating batch 38/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 38/300 (batch_size = 1).
+2025-12-14 11:54:22,836 | INFO : Finished evaluating batch 39/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 39/300 (batch_size = 1).
+2025-12-14 11:54:30,069 | INFO : Finished evaluating batch 40/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 40/300 (batch_size = 1).
+2025-12-14 11:54:37,211 | INFO : Finished evaluating batch 41/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 41/300 (batch_size = 1).
+2025-12-14 11:54:44,416 | INFO : Finished evaluating batch 42/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 42/300 (batch_size = 1).
+2025-12-14 11:54:45,225 | INFO : Finished evaluating batch 43/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 43/300 (batch_size = 1).
+2025-12-14 11:54:46,054 | INFO : Finished evaluating batch 44/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 44/300 (batch_size = 1).
+2025-12-14 11:54:46,854 | INFO : Finished evaluating batch 45/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 45/300 (batch_size = 1).
+2025-12-14 11:54:47,650 | INFO : Finished evaluating batch 46/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 46/300 (batch_size = 1).
+2025-12-14 11:54:48,442 | INFO : Finished evaluating batch 47/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 47/300 (batch_size = 1).
+2025-12-14 11:54:49,242 | INFO : Finished evaluating batch 48/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 48/300 (batch_size = 1).
+2025-12-14 11:54:56,503 | INFO : Finished evaluating batch 49/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 49/300 (batch_size = 1).
+2025-12-14 11:55:03,722 | INFO : Finished evaluating batch 50/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 50/300 (batch_size = 1).
+2025-12-14 11:55:10,995 | INFO : Finished evaluating batch 51/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 51/300 (batch_size = 1).
+2025-12-14 11:55:18,263 | INFO : Finished evaluating batch 52/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 52/300 (batch_size = 1).
+2025-12-14 11:55:25,476 | INFO : Finished evaluating batch 53/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 53/300 (batch_size = 1).
+2025-12-14 11:55:32,814 | INFO : Finished evaluating batch 54/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 54/300 (batch_size = 1).
+2025-12-14 11:55:40,018 | INFO : Finished evaluating batch 55/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 55/300 (batch_size = 1).
+2025-12-14 11:55:47,273 | INFO : Finished evaluating batch 56/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 56/300 (batch_size = 1).
+2025-12-14 11:55:48,230 | INFO : Finished evaluating batch 57/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 57/300 (batch_size = 1).
+2025-12-14 11:55:55,464 | INFO : Finished evaluating batch 58/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 58/300 (batch_size = 1).
+2025-12-14 11:56:02,677 | INFO : Finished evaluating batch 59/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 59/300 (batch_size = 1).
+2025-12-14 11:56:09,920 | INFO : Finished evaluating batch 60/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 60/300 (batch_size = 1).
+2025-12-14 11:56:11,046 | INFO : Finished evaluating batch 61/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 61/300 (batch_size = 1).
+2025-12-14 11:56:12,181 | INFO : Finished evaluating batch 62/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 62/300 (batch_size = 1).
+2025-12-14 11:56:13,307 | INFO : Finished evaluating batch 63/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 63/300 (batch_size = 1).
+2025-12-14 11:56:15,358 | INFO : Finished evaluating batch 64/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 64/300 (batch_size = 1).
+2025-12-14 11:56:23,408 | INFO : Finished evaluating batch 65/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 65/300 (batch_size = 1).
+2025-12-14 11:56:25,457 | INFO : Finished evaluating batch 66/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 66/300 (batch_size = 1).
+2025-12-14 11:56:27,529 | INFO : Finished evaluating batch 67/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 67/300 (batch_size = 1).
+2025-12-14 11:56:29,575 | INFO : Finished evaluating batch 68/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 68/300 (batch_size = 1).
+2025-12-14 11:56:37,509 | INFO : Finished evaluating batch 69/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 69/300 (batch_size = 1).
+2025-12-14 11:56:45,486 | INFO : Finished evaluating batch 70/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 70/300 (batch_size = 1).
+2025-12-14 11:56:53,507 | INFO : Finished evaluating batch 71/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 71/300 (batch_size = 1).
+2025-12-14 11:57:01,482 | INFO : Finished evaluating batch 72/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 72/300 (batch_size = 1).
+2025-12-14 11:57:09,411 | INFO : Finished evaluating batch 73/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 73/300 (batch_size = 1).
+2025-12-14 11:57:17,360 | INFO : Finished evaluating batch 74/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 74/300 (batch_size = 1).
+2025-12-14 11:57:25,390 | INFO : Finished evaluating batch 75/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 75/300 (batch_size = 1).
+2025-12-14 11:57:33,379 | INFO : Finished evaluating batch 76/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 76/300 (batch_size = 1).
+2025-12-14 11:57:41,406 | INFO : Finished evaluating batch 77/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 77/300 (batch_size = 1).
+2025-12-14 11:57:49,441 | INFO : Finished evaluating batch 78/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 78/300 (batch_size = 1).
+2025-12-14 11:57:57,457 | INFO : Finished evaluating batch 79/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 79/300 (batch_size = 1).
+2025-12-14 11:58:05,373 | INFO : Finished evaluating batch 80/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 80/300 (batch_size = 1).
+2025-12-14 11:58:13,349 | INFO : Finished evaluating batch 81/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 81/300 (batch_size = 1).
+2025-12-14 11:58:21,314 | INFO : Finished evaluating batch 82/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 82/300 (batch_size = 1).
+2025-12-14 11:58:29,354 | INFO : Finished evaluating batch 83/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 83/300 (batch_size = 1).
+2025-12-14 11:58:37,424 | INFO : Finished evaluating batch 84/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 84/300 (batch_size = 1).
+2025-12-14 11:58:45,581 | INFO : Finished evaluating batch 85/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 85/300 (batch_size = 1).
+2025-12-14 11:58:53,760 | INFO : Finished evaluating batch 86/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 86/300 (batch_size = 1).
+2025-12-14 11:59:01,958 | INFO : Finished evaluating batch 87/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 87/300 (batch_size = 1).
+2025-12-14 11:59:10,192 | INFO : Finished evaluating batch 88/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 88/300 (batch_size = 1).
+2025-12-14 11:59:18,350 | INFO : Finished evaluating batch 89/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 89/300 (batch_size = 1).
+2025-12-14 11:59:26,422 | INFO : Finished evaluating batch 90/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 90/300 (batch_size = 1).
+2025-12-14 11:59:27,926 | INFO : Finished evaluating batch 91/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 91/300 (batch_size = 1).
+2025-12-14 11:59:29,435 | INFO : Finished evaluating batch 92/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 92/300 (batch_size = 1).
+2025-12-14 11:59:30,943 | INFO : Finished evaluating batch 93/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 93/300 (batch_size = 1).
+2025-12-14 11:59:33,498 | INFO : Finished evaluating batch 94/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 94/300 (batch_size = 1).
+2025-12-14 11:59:36,001 | INFO : Finished evaluating batch 95/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 95/300 (batch_size = 1).
+2025-12-14 11:59:38,512 | INFO : Finished evaluating batch 96/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 96/300 (batch_size = 1).
+2025-12-14 11:59:41,036 | INFO : Finished evaluating batch 97/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 97/300 (batch_size = 1).
+2025-12-14 11:59:42,525 | INFO : Finished evaluating batch 98/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 98/300 (batch_size = 1).
+2025-12-14 11:59:44,031 | INFO : Finished evaluating batch 99/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 99/300 (batch_size = 1).
+2025-12-14 11:59:46,547 | INFO : Finished evaluating batch 100/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 100/300 (batch_size = 1).
+2025-12-14 11:59:49,051 | INFO : Finished evaluating batch 101/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 101/300 (batch_size = 1).
+2025-12-14 11:59:51,543 | INFO : Finished evaluating batch 102/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 102/300 (batch_size = 1).
+2025-12-14 12:00:00,591 | INFO : Finished evaluating batch 103/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 103/300 (batch_size = 1).
+2025-12-14 12:00:09,932 | INFO : Finished evaluating batch 104/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 104/300 (batch_size = 1).
+2025-12-14 12:00:19,094 | INFO : Finished evaluating batch 105/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 105/300 (batch_size = 1).
+2025-12-14 12:00:28,123 | INFO : Finished evaluating batch 106/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 106/300 (batch_size = 1).
+2025-12-14 12:00:37,164 | INFO : Finished evaluating batch 107/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 107/300 (batch_size = 1).
+2025-12-14 12:00:46,194 | INFO : Finished evaluating batch 108/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 108/300 (batch_size = 1).
+2025-12-14 12:00:55,250 | INFO : Finished evaluating batch 109/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 109/300 (batch_size = 1).
+2025-12-14 12:01:04,238 | INFO : Finished evaluating batch 110/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 110/300 (batch_size = 1).
+2025-12-14 12:01:13,141 | INFO : Finished evaluating batch 111/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 111/300 (batch_size = 1).
+2025-12-14 12:01:22,189 | INFO : Finished evaluating batch 112/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 112/300 (batch_size = 1).
+2025-12-14 12:01:31,191 | INFO : Finished evaluating batch 113/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 113/300 (batch_size = 1).
+2025-12-14 12:01:40,196 | INFO : Finished evaluating batch 114/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 114/300 (batch_size = 1).
+2025-12-14 12:01:49,187 | INFO : Finished evaluating batch 115/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 115/300 (batch_size = 1).
+2025-12-14 12:01:58,126 | INFO : Finished evaluating batch 116/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 116/300 (batch_size = 1).
+2025-12-14 12:02:07,121 | INFO : Finished evaluating batch 117/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 117/300 (batch_size = 1).
+2025-12-14 12:02:16,094 | INFO : Finished evaluating batch 118/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 118/300 (batch_size = 1).
+2025-12-14 12:02:25,147 | INFO : Finished evaluating batch 119/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 119/300 (batch_size = 1).
+2025-12-14 12:02:34,029 | INFO : Finished evaluating batch 120/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 120/300 (batch_size = 1).
+2025-12-14 12:02:35,928 | INFO : Finished evaluating batch 121/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 121/300 (batch_size = 1).
+2025-12-14 12:02:37,834 | INFO : Finished evaluating batch 122/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 122/300 (batch_size = 1).
+2025-12-14 12:02:39,735 | INFO : Finished evaluating batch 123/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 123/300 (batch_size = 1).
+2025-12-14 12:02:49,749 | INFO : Finished evaluating batch 124/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 124/300 (batch_size = 1).
+2025-12-14 12:02:52,730 | INFO : Finished evaluating batch 125/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 125/300 (batch_size = 1).
+2025-12-14 12:02:55,696 | INFO : Finished evaluating batch 126/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 126/300 (batch_size = 1).
+2025-12-14 12:03:05,657 | INFO : Finished evaluating batch 127/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 127/300 (batch_size = 1).
+2025-12-14 12:03:15,656 | INFO : Finished evaluating batch 128/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 128/300 (batch_size = 1).
+2025-12-14 12:03:25,624 | INFO : Finished evaluating batch 129/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 129/300 (batch_size = 1).
+2025-12-14 12:03:28,591 | INFO : Finished evaluating batch 130/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 130/300 (batch_size = 1).
+2025-12-14 12:03:31,556 | INFO : Finished evaluating batch 131/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 131/300 (batch_size = 1).
+2025-12-14 12:03:34,525 | INFO : Finished evaluating batch 132/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 132/300 (batch_size = 1).
+2025-12-14 12:03:44,431 | INFO : Finished evaluating batch 133/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 133/300 (batch_size = 1).
+2025-12-14 12:03:54,360 | INFO : Finished evaluating batch 134/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 134/300 (batch_size = 1).
+2025-12-14 12:04:04,296 | INFO : Finished evaluating batch 135/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 135/300 (batch_size = 1).
+2025-12-14 12:04:14,142 | INFO : Finished evaluating batch 136/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 136/300 (batch_size = 1).
+2025-12-14 12:04:23,972 | INFO : Finished evaluating batch 137/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 137/300 (batch_size = 1).
+2025-12-14 12:04:33,804 | INFO : Finished evaluating batch 138/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 138/300 (batch_size = 1).
+2025-12-14 12:04:43,687 | INFO : Finished evaluating batch 139/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 139/300 (batch_size = 1).
+2025-12-14 12:04:53,593 | INFO : Finished evaluating batch 140/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 140/300 (batch_size = 1).
+2025-12-14 12:05:03,352 | INFO : Finished evaluating batch 141/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 141/300 (batch_size = 1).
+2025-12-14 12:05:13,236 | INFO : Finished evaluating batch 142/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 142/300 (batch_size = 1).
+2025-12-14 12:05:23,001 | INFO : Finished evaluating batch 143/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 143/300 (batch_size = 1).
+2025-12-14 12:05:32,951 | INFO : Finished evaluating batch 144/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 144/300 (batch_size = 1).
+2025-12-14 12:05:42,726 | INFO : Finished evaluating batch 145/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 145/300 (batch_size = 1).
+2025-12-14 12:05:52,556 | INFO : Finished evaluating batch 146/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 146/300 (batch_size = 1).
+2025-12-14 12:06:02,345 | INFO : Finished evaluating batch 147/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 147/300 (batch_size = 1).
+2025-12-14 12:06:12,159 | INFO : Finished evaluating batch 148/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 148/300 (batch_size = 1).
+2025-12-14 12:06:21,946 | INFO : Finished evaluating batch 149/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 149/300 (batch_size = 1).
+2025-12-14 12:06:31,794 | INFO : Finished evaluating batch 150/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 150/300 (batch_size = 1).
+2025-12-14 12:06:34,095 | INFO : Finished evaluating batch 151/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 151/300 (batch_size = 1).
+2025-12-14 12:06:36,385 | INFO : Finished evaluating batch 152/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 152/300 (batch_size = 1).
+2025-12-14 12:06:38,668 | INFO : Finished evaluating batch 153/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 153/300 (batch_size = 1).
+2025-12-14 12:06:49,337 | INFO : Finished evaluating batch 154/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 154/300 (batch_size = 1).
+2025-12-14 12:07:00,152 | INFO : Finished evaluating batch 155/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 155/300 (batch_size = 1).
+2025-12-14 12:07:10,941 | INFO : Finished evaluating batch 156/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 156/300 (batch_size = 1).
+2025-12-14 12:07:21,591 | INFO : Finished evaluating batch 157/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 157/300 (batch_size = 1).
+2025-12-14 12:07:32,343 | INFO : Finished evaluating batch 158/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 158/300 (batch_size = 1).
+2025-12-14 12:07:43,216 | INFO : Finished evaluating batch 159/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 159/300 (batch_size = 1).
+2025-12-14 12:07:53,905 | INFO : Finished evaluating batch 160/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 160/300 (batch_size = 1).
+2025-12-14 12:08:04,654 | INFO : Finished evaluating batch 161/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 161/300 (batch_size = 1).
+2025-12-14 12:08:15,440 | INFO : Finished evaluating batch 162/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 162/300 (batch_size = 1).
+2025-12-14 12:08:26,059 | INFO : Finished evaluating batch 163/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 163/300 (batch_size = 1).
+2025-12-14 12:08:36,629 | INFO : Finished evaluating batch 164/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 164/300 (batch_size = 1).
+2025-12-14 12:08:47,236 | INFO : Finished evaluating batch 165/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 165/300 (batch_size = 1).
+2025-12-14 12:08:57,759 | INFO : Finished evaluating batch 166/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 166/300 (batch_size = 1).
+2025-12-14 12:09:08,284 | INFO : Finished evaluating batch 167/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 167/300 (batch_size = 1).
+2025-12-14 12:09:18,868 | INFO : Finished evaluating batch 168/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 168/300 (batch_size = 1).
+2025-12-14 12:09:29,498 | INFO : Finished evaluating batch 169/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 169/300 (batch_size = 1).
+2025-12-14 12:09:40,111 | INFO : Finished evaluating batch 170/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 170/300 (batch_size = 1).
+2025-12-14 12:09:50,640 | INFO : Finished evaluating batch 171/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 171/300 (batch_size = 1).
+2025-12-14 12:10:01,180 | INFO : Finished evaluating batch 172/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 172/300 (batch_size = 1).
+2025-12-14 12:10:11,748 | INFO : Finished evaluating batch 173/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 173/300 (batch_size = 1).
+2025-12-14 12:10:22,335 | INFO : Finished evaluating batch 174/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 174/300 (batch_size = 1).
+2025-12-14 12:10:32,923 | INFO : Finished evaluating batch 175/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 175/300 (batch_size = 1).
+2025-12-14 12:10:43,572 | INFO : Finished evaluating batch 176/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 176/300 (batch_size = 1).
+2025-12-14 12:10:54,149 | INFO : Finished evaluating batch 177/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 177/300 (batch_size = 1).
+2025-12-14 12:11:04,714 | INFO : Finished evaluating batch 178/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 178/300 (batch_size = 1).
+2025-12-14 12:11:15,296 | INFO : Finished evaluating batch 179/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 179/300 (batch_size = 1).
+2025-12-14 12:11:26,164 | INFO : Finished evaluating batch 180/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 180/300 (batch_size = 1).
+2025-12-14 12:11:28,896 | INFO : Finished evaluating batch 181/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 181/300 (batch_size = 1).
+2025-12-14 12:11:31,638 | INFO : Finished evaluating batch 182/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 182/300 (batch_size = 1).
+2025-12-14 12:11:34,382 | INFO : Finished evaluating batch 183/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 183/300 (batch_size = 1).
+2025-12-14 12:11:46,168 | INFO : Finished evaluating batch 184/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 184/300 (batch_size = 1).
+2025-12-14 12:11:58,024 | INFO : Finished evaluating batch 185/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 185/300 (batch_size = 1).
+2025-12-14 12:12:09,935 | INFO : Finished evaluating batch 186/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 186/300 (batch_size = 1).
+2025-12-14 12:12:21,776 | INFO : Finished evaluating batch 187/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 187/300 (batch_size = 1).
+2025-12-14 12:12:33,633 | INFO : Finished evaluating batch 188/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 188/300 (batch_size = 1).
+2025-12-14 12:12:45,522 | INFO : Finished evaluating batch 189/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 189/300 (batch_size = 1).
+2025-12-14 12:12:57,277 | INFO : Finished evaluating batch 190/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 190/300 (batch_size = 1).
+2025-12-14 12:13:09,010 | INFO : Finished evaluating batch 191/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 191/300 (batch_size = 1).
+2025-12-14 12:13:20,883 | INFO : Finished evaluating batch 192/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 192/300 (batch_size = 1).
+2025-12-14 12:13:32,721 | INFO : Finished evaluating batch 193/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 193/300 (batch_size = 1).
+2025-12-14 12:13:44,456 | INFO : Finished evaluating batch 194/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 194/300 (batch_size = 1).
+2025-12-14 12:13:56,248 | INFO : Finished evaluating batch 195/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 195/300 (batch_size = 1).
+2025-12-14 12:14:07,978 | INFO : Finished evaluating batch 196/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 196/300 (batch_size = 1).
+2025-12-14 12:14:19,820 | INFO : Finished evaluating batch 197/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 197/300 (batch_size = 1).
+2025-12-14 12:14:31,683 | INFO : Finished evaluating batch 198/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 198/300 (batch_size = 1).
+2025-12-14 12:14:43,504 | INFO : Finished evaluating batch 199/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 199/300 (batch_size = 1).
+2025-12-14 12:14:55,296 | INFO : Finished evaluating batch 200/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 200/300 (batch_size = 1).
+2025-12-14 12:15:07,092 | INFO : Finished evaluating batch 201/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 201/300 (batch_size = 1).
+2025-12-14 12:15:18,978 | INFO : Finished evaluating batch 202/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 202/300 (batch_size = 1).
+2025-12-14 12:15:30,811 | INFO : Finished evaluating batch 203/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 203/300 (batch_size = 1).
+2025-12-14 12:15:42,697 | INFO : Finished evaluating batch 204/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 204/300 (batch_size = 1).
+2025-12-14 12:15:54,603 | INFO : Finished evaluating batch 205/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 205/300 (batch_size = 1).
+2025-12-14 12:16:06,549 | INFO : Finished evaluating batch 206/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 206/300 (batch_size = 1).
+2025-12-14 12:16:18,452 | INFO : Finished evaluating batch 207/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 207/300 (batch_size = 1).
+2025-12-14 12:16:30,366 | INFO : Finished evaluating batch 208/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 208/300 (batch_size = 1).
+2025-12-14 12:16:42,169 | INFO : Finished evaluating batch 209/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 209/300 (batch_size = 1).
+2025-12-14 12:16:53,901 | INFO : Finished evaluating batch 210/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 210/300 (batch_size = 1).
+2025-12-14 12:16:57,117 | INFO : Finished evaluating batch 211/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 211/300 (batch_size = 1).
+2025-12-14 12:17:00,346 | INFO : Finished evaluating batch 212/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 212/300 (batch_size = 1).
+2025-12-14 12:17:03,576 | INFO : Finished evaluating batch 213/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 213/300 (batch_size = 1).
+2025-12-14 12:17:06,794 | INFO : Finished evaluating batch 214/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 214/300 (batch_size = 1).
+2025-12-14 12:17:10,019 | INFO : Finished evaluating batch 215/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 215/300 (batch_size = 1).
+2025-12-14 12:17:13,263 | INFO : Finished evaluating batch 216/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 216/300 (batch_size = 1).
+2025-12-14 12:17:26,158 | INFO : Finished evaluating batch 217/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 217/300 (batch_size = 1).
+2025-12-14 12:17:39,021 | INFO : Finished evaluating batch 218/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 218/300 (batch_size = 1).
+2025-12-14 12:17:52,018 | INFO : Finished evaluating batch 219/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 219/300 (batch_size = 1).
+2025-12-14 12:18:05,009 | INFO : Finished evaluating batch 220/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 220/300 (batch_size = 1).
+2025-12-14 12:18:17,790 | INFO : Finished evaluating batch 221/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 221/300 (batch_size = 1).
+2025-12-14 12:18:30,726 | INFO : Finished evaluating batch 222/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 222/300 (batch_size = 1).
+2025-12-14 12:18:43,743 | INFO : Finished evaluating batch 223/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 223/300 (batch_size = 1).
+2025-12-14 12:18:56,638 | INFO : Finished evaluating batch 224/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 224/300 (batch_size = 1).
+2025-12-14 12:19:09,365 | INFO : Finished evaluating batch 225/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 225/300 (batch_size = 1).
+2025-12-14 12:19:22,264 | INFO : Finished evaluating batch 226/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 226/300 (batch_size = 1).
+2025-12-14 12:19:35,317 | INFO : Finished evaluating batch 227/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 227/300 (batch_size = 1).
+2025-12-14 12:19:48,278 | INFO : Finished evaluating batch 228/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 228/300 (batch_size = 1).
+2025-12-14 12:20:01,248 | INFO : Finished evaluating batch 229/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 229/300 (batch_size = 1).
+2025-12-14 12:20:14,303 | INFO : Finished evaluating batch 230/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 230/300 (batch_size = 1).
+2025-12-14 12:20:27,290 | INFO : Finished evaluating batch 231/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 231/300 (batch_size = 1).
+2025-12-14 12:20:40,167 | INFO : Finished evaluating batch 232/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 232/300 (batch_size = 1).
+2025-12-14 12:20:53,174 | INFO : Finished evaluating batch 233/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 233/300 (batch_size = 1).
+2025-12-14 12:21:06,303 | INFO : Finished evaluating batch 234/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 234/300 (batch_size = 1).
+2025-12-14 12:21:19,459 | INFO : Finished evaluating batch 235/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 235/300 (batch_size = 1).
+2025-12-14 12:21:32,551 | INFO : Finished evaluating batch 236/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 236/300 (batch_size = 1).
+2025-12-14 12:21:45,439 | INFO : Finished evaluating batch 237/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 237/300 (batch_size = 1).
+2025-12-14 12:21:58,446 | INFO : Finished evaluating batch 238/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 238/300 (batch_size = 1).
+2025-12-14 12:22:11,466 | INFO : Finished evaluating batch 239/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 239/300 (batch_size = 1).
+2025-12-14 12:22:24,385 | INFO : Finished evaluating batch 240/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 240/300 (batch_size = 1).
+2025-12-14 12:22:29,463 | INFO : Finished evaluating batch 241/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 241/300 (batch_size = 1).
+2025-12-14 12:22:34,604 | INFO : Finished evaluating batch 242/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 242/300 (batch_size = 1).
+2025-12-14 12:22:39,724 | INFO : Finished evaluating batch 243/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 243/300 (batch_size = 1).
+2025-12-14 12:22:53,695 | INFO : Finished evaluating batch 244/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 244/300 (batch_size = 1).
+2025-12-14 12:23:07,932 | INFO : Finished evaluating batch 245/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 245/300 (batch_size = 1).
+2025-12-14 12:23:22,046 | INFO : Finished evaluating batch 246/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 246/300 (batch_size = 1).
+2025-12-14 12:23:36,378 | INFO : Finished evaluating batch 247/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 247/300 (batch_size = 1).
+2025-12-14 12:23:50,495 | INFO : Finished evaluating batch 248/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 248/300 (batch_size = 1).
+2025-12-14 12:24:04,657 | INFO : Finished evaluating batch 249/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 249/300 (batch_size = 1).
+2025-12-14 12:24:19,023 | INFO : Finished evaluating batch 250/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 250/300 (batch_size = 1).
+2025-12-14 12:24:33,157 | INFO : Finished evaluating batch 251/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 251/300 (batch_size = 1).
+2025-12-14 12:24:47,323 | INFO : Finished evaluating batch 252/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 252/300 (batch_size = 1).
+2025-12-14 12:25:01,417 | INFO : Finished evaluating batch 253/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 253/300 (batch_size = 1).
+2025-12-14 12:25:15,456 | INFO : Finished evaluating batch 254/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 254/300 (batch_size = 1).
+2025-12-14 12:25:29,464 | INFO : Finished evaluating batch 255/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 255/300 (batch_size = 1).
+2025-12-14 12:25:43,616 | INFO : Finished evaluating batch 256/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 256/300 (batch_size = 1).
+2025-12-14 12:25:57,645 | INFO : Finished evaluating batch 257/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 257/300 (batch_size = 1).
+2025-12-14 12:26:11,795 | INFO : Finished evaluating batch 258/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 258/300 (batch_size = 1).
+2025-12-14 12:26:26,059 | INFO : Finished evaluating batch 259/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 259/300 (batch_size = 1).
+2025-12-14 12:26:40,180 | INFO : Finished evaluating batch 260/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 260/300 (batch_size = 1).
+2025-12-14 12:26:54,368 | INFO : Finished evaluating batch 261/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 261/300 (batch_size = 1).
+2025-12-14 12:27:08,512 | INFO : Finished evaluating batch 262/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 262/300 (batch_size = 1).
+2025-12-14 12:27:22,770 | INFO : Finished evaluating batch 263/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 263/300 (batch_size = 1).
+2025-12-14 12:27:36,811 | INFO : Finished evaluating batch 264/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 264/300 (batch_size = 1).
+2025-12-14 12:27:51,014 | INFO : Finished evaluating batch 265/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 265/300 (batch_size = 1).
+2025-12-14 12:28:05,150 | INFO : Finished evaluating batch 266/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 266/300 (batch_size = 1).
+2025-12-14 12:28:19,267 | INFO : Finished evaluating batch 267/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 267/300 (batch_size = 1).
+2025-12-14 12:28:33,438 | INFO : Finished evaluating batch 268/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 268/300 (batch_size = 1).
+2025-12-14 12:28:47,739 | INFO : Finished evaluating batch 269/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 269/300 (batch_size = 1).
+2025-12-14 12:29:01,998 | INFO : Finished evaluating batch 270/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 270/300 (batch_size = 1).
+2025-12-14 12:29:06,257 | INFO : Finished evaluating batch 271/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 271/300 (batch_size = 1).
+2025-12-14 12:29:10,521 | INFO : Finished evaluating batch 272/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 272/300 (batch_size = 1).
+2025-12-14 12:29:14,780 | INFO : Finished evaluating batch 273/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 273/300 (batch_size = 1).
+2025-12-14 12:29:20,476 | INFO : Finished evaluating batch 274/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 274/300 (batch_size = 1).
+2025-12-14 12:29:26,228 | INFO : Finished evaluating batch 275/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 275/300 (batch_size = 1).
+2025-12-14 12:29:31,936 | INFO : Finished evaluating batch 276/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 276/300 (batch_size = 1).
+2025-12-14 12:29:37,685 | INFO : Finished evaluating batch 277/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 277/300 (batch_size = 1).
+2025-12-14 12:29:43,414 | INFO : Finished evaluating batch 278/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 278/300 (batch_size = 1).
+2025-12-14 12:29:49,128 | INFO : Finished evaluating batch 279/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 279/300 (batch_size = 1).
+2025-12-14 12:29:54,855 | INFO : Finished evaluating batch 280/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 280/300 (batch_size = 1).
+2025-12-14 12:30:00,567 | INFO : Finished evaluating batch 281/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 281/300 (batch_size = 1).
+2025-12-14 12:30:06,300 | INFO : Finished evaluating batch 282/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 282/300 (batch_size = 1).
+2025-12-14 12:30:11,996 | INFO : Finished evaluating batch 283/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 283/300 (batch_size = 1).
+2025-12-14 12:30:17,738 | INFO : Finished evaluating batch 284/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 284/300 (batch_size = 1).
+2025-12-14 12:30:23,476 | INFO : Finished evaluating batch 285/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 285/300 (batch_size = 1).
+2025-12-14 12:30:38,628 | INFO : Finished evaluating batch 286/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 286/300 (batch_size = 1).
+2025-12-14 12:30:53,865 | INFO : Finished evaluating batch 287/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 287/300 (batch_size = 1).
+2025-12-14 12:31:09,075 | INFO : Finished evaluating batch 288/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 288/300 (batch_size = 1).
+2025-12-14 12:31:14,816 | INFO : Finished evaluating batch 289/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 289/300 (batch_size = 1).
+2025-12-14 12:31:20,562 | INFO : Finished evaluating batch 290/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 290/300 (batch_size = 1).
+2025-12-14 12:31:26,240 | INFO : Finished evaluating batch 291/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 291/300 (batch_size = 1).
+2025-12-14 12:31:31,957 | INFO : Finished evaluating batch 292/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 292/300 (batch_size = 1).
+2025-12-14 12:31:37,681 | INFO : Finished evaluating batch 293/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 293/300 (batch_size = 1).
+2025-12-14 12:31:43,414 | INFO : Finished evaluating batch 294/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 294/300 (batch_size = 1).
+2025-12-14 12:31:49,120 | INFO : Finished evaluating batch 295/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 295/300 (batch_size = 1).
+2025-12-14 12:31:54,827 | INFO : Finished evaluating batch 296/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 296/300 (batch_size = 1).
+2025-12-14 12:32:00,593 | INFO : Finished evaluating batch 297/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 297/300 (batch_size = 1).
+2025-12-14 12:32:15,770 | INFO : Finished evaluating batch 298/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 298/300 (batch_size = 1).
+2025-12-14 12:32:30,912 | INFO : Finished evaluating batch 299/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 299/300 (batch_size = 1).
+2025-12-14 12:32:46,104 | INFO : Finished evaluating batch 300/300 (batch_size = 1).
+INFO:main:Finished evaluating batch 300/300 (batch_size = 1).
+2025-12-14 12:32:46,105 | INFO : Finished evaluating all 300 batches (batch_size = 1).
+INFO:main:Finished evaluating all 300 batches (batch_size = 1).
+2025-12-14 12:32:46,128 | INFO : raw_exp_results processed.
+INFO:main:raw_exp_results processed.
+2025-12-14 12:32:46,151 | INFO : Raw results saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/raw_results.json.
+INFO:main:Raw results saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/raw_results.json.
+2025-12-14 12:32:46,151 | INFO : Experiments concluded.
+INFO:main:Experiments concluded.
+2025-12-14 12:32:46,151 | INFO : Raw results is a dictionary with keys: [512, 2730, 4949, 7168, 9386, 11605, 13824, 16042, 18261, 20480]
+INFO:main:Raw results is a dictionary with keys: [512, 2730, 4949, 7168, 9386, 11605, 13824, 16042, 18261, 20480]
+2025-12-14 12:32:46,151 | INFO : Processed results:
+INFO:main:Processed results:
+2025-12-14 12:32:46,152 | INFO : {
+    "512": {
+        "0": {
+            "exact_match": 0.6666666666666666,
+            "partial_match": 0.8095238095238094
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "2730": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "4949": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "7168": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "9386": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "11605": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "13824": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "16042": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "18261": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "20480": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "background_len_wise_results": {
+        "512": {
+            "exact_match": 0.9666666666666666,
+            "partial_match": 0.980952380952381
+        },
+        "2730": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "4949": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "7168": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "9386": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "11605": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "13824": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "16042": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "18261": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "20480": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "overall_results": {
+        "exact_match": 0.9966666666666667,
+        "partial_match": 0.9980952380952381
+    }
+}
+INFO:main:{
+    "512": {
+        "0": {
+            "exact_match": 0.6666666666666666,
+            "partial_match": 0.8095238095238094
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "2730": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "4949": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "7168": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "9386": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "11605": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "13824": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "16042": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "18261": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "20480": {
+        "0": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.1111111111111111": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.2222222222222222": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.3333333333333333": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.4444444444444444": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.5555555555555556": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.6666666666666666": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.7777777777777778": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "0.8888888888888888": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "1": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "background_len_wise_results": {
+        "512": {
+            "exact_match": 0.9666666666666666,
+            "partial_match": 0.980952380952381
+        },
+        "2730": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "4949": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "7168": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "9386": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "11605": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "13824": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "16042": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "18261": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        },
+        "20480": {
+            "exact_match": 1.0,
+            "partial_match": 1.0
+        }
+    },
+    "overall_results": {
+        "exact_match": 0.9966666666666667,
+        "partial_match": 0.9980952380952381
+    }
+}
+2025-12-14 12:32:46,166 | INFO : Experiment duration: 0:39:43.734931
+INFO:main:Experiment duration: 0:39:43.734931
+2025-12-14 12:32:46,168 | INFO : Output config saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json.
+INFO:main:Output config saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json.
+2025-12-14 12:32:46,168 | INFO : Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad ended at 2025-12-14 12:32:46.166808-06:00. Duration: 0:39:43.734931
+INFO:main:Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad ended at 2025-12-14 12:32:46.166808-06:00. Duration: 0:39:43.734931
+
+📊 Gerando visualização...
+
+🔍 Looking for results in: ./results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/
+✅ Found results directly in: ./results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/
+📄 Loading configuration from: results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json
+🎨 Plot will be saved as: results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/result_heatmap.pdf
+📊 Processing 100 data points...
+📈 Heatmap dimensions: (10, 10)
+✅ Plot saved successfully to: results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/result_heatmap.pdf
+
+✅ Experimento concluído!
+   Resultados em: ./results/paulgraham_passkey/baseline/.../20480words_10x10x3_7digits/
