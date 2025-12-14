@@ -1,7 +1,7 @@
 =========================================
-🚀 EXECUTANDO EXPERIMENTO PAULGRAHAM PASSKEY
+🚀 EXECUTANDO EXPERIMENTO PAULGRAHAM PASSKEY USANDO CRAD-KV™ Fractal Compressor
 =========================================
-Método:      baseline
+Método:      crad/CRAD-FC
 Configuração: 20480words_10x10x3_7digits
 Modelo:      mistral-7b-instruct-v0.2
 Saída:       ./results
@@ -38,7 +38,7 @@ INFO:main:Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-in
         "out_of_max_len_allowed": true,
         "base": 1000000,
         "rope_theta_factor": 1.0,
-        "method": "baseline",
+        "method": "crad",
         "token_budget": 4096,
         "compressed_size": 256,
         "alpha": 1.0,
@@ -75,7 +75,7 @@ INFO:main:Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-in
         "exp_desc": "paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad",
         "pipeline_config_dir": "config/pipeline_config/paulgraham_passkey/mistral-7b-instruct-v0.2.json",
         "eval_config_dir": "config/eval_config/paulgraham_passkey/20480words_10x10x3_7digits.json",
-        "output_folder_dir": "results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/",
+        "output_folder_dir": "results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/",
         "job_post_via": "slurm_sbatch",
         "sub_dir": {
             "input_config": "input_config/",
@@ -104,7 +104,7 @@ INFO:main:{
         "out_of_max_len_allowed": true,
         "base": 1000000,
         "rope_theta_factor": 1.0,
-        "method": "baseline",
+        "method": "crad",
         "token_budget": 4096,
         "compressed_size": 256,
         "alpha": 1.0,
@@ -141,7 +141,7 @@ INFO:main:{
         "exp_desc": "paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad",
         "pipeline_config_dir": "config/pipeline_config/paulgraham_passkey/mistral-7b-instruct-v0.2.json",
         "eval_config_dir": "config/eval_config/paulgraham_passkey/20480words_10x10x3_7digits.json",
-        "output_folder_dir": "results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/",
+        "output_folder_dir": "results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/",
         "job_post_via": "slurm_sbatch",
         "sub_dir": {
             "input_config": "input_config/",
@@ -163,8 +163,8 @@ INFO:main:Evaluate on background_lens: [512, 2730, 4949, 7168, 9386, 11605, 1382
 INFO:main:Evaluate on depths: [0, 0.1111111111111111, 0.2222222222222222, 0.3333333333333333, 0.4444444444444444, 0.5555555555555556, 0.6666666666666666, 0.7777777777777778, 0.8888888888888888, 1]
 2025-12-14 11:53:08,868 | INFO : All experiment 300 inputs generated (10 background_lens; 10 depths; 3 iterations for each depth level)
 INFO:main:All experiment 300 inputs generated (10 background_lens; 10 depths; 3 iterations for each depth level)
-2025-12-14 11:53:08,868 | INFO : Starting evaluation via baseline
-INFO:main:Starting evaluation via baseline
+2025-12-14 11:53:08,868 | INFO : Starting evaluation via crad
+INFO:main:Starting evaluation via crad
 Loading checkpoint shards: 100% 3/3 [00:08<00:00,  2.95s/it]
 2025-12-14 11:53:19,537 | INFO : Longest input (29908 tokens) is below model_max_len (32000 tokens).
 INFO:main:Longest input (29908 tokens) is below model_max_len (32000 tokens).
@@ -774,8 +774,8 @@ INFO:main:Finished evaluating batch 300/300 (batch_size = 1).
 INFO:main:Finished evaluating all 300 batches (batch_size = 1).
 2025-12-14 12:32:46,128 | INFO : raw_exp_results processed.
 INFO:main:raw_exp_results processed.
-2025-12-14 12:32:46,151 | INFO : Raw results saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/raw_results.json.
-INFO:main:Raw results saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/raw_results.json.
+2025-12-14 12:32:46,151 | INFO : Raw results saved to results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/raw_results.json.
+INFO:main:Raw results saved to results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/raw_results.json.
 2025-12-14 12:32:46,151 | INFO : Experiments concluded.
 INFO:main:Experiments concluded.
 2025-12-14 12:32:46,151 | INFO : Raw results is a dictionary with keys: [512, 2730, 4949, 7168, 9386, 11605, 13824, 16042, 18261, 20480]
@@ -1720,20 +1720,20 @@ INFO:main:{
 }
 2025-12-14 12:32:46,166 | INFO : Experiment duration: 0:39:43.734931
 INFO:main:Experiment duration: 0:39:43.734931
-2025-12-14 12:32:46,168 | INFO : Output config saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json.
-INFO:main:Output config saved to results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json.
+2025-12-14 12:32:46,168 | INFO : Output config saved to results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json.
+INFO:main:Output config saved to results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json.
 2025-12-14 12:32:46,168 | INFO : Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad ended at 2025-12-14 12:32:46.166808-06:00. Duration: 0:39:43.734931
 INFO:main:Experiment paulgraham_passkey_20480words_10x10x3_7digits_mistral-7b-instruct-v0.2_crad ended at 2025-12-14 12:32:46.166808-06:00. Duration: 0:39:43.734931
 
 📊 Gerando visualização...
 
-🔍 Looking for results in: ./results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/
-✅ Found results directly in: ./results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/
-📄 Loading configuration from: results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json
-🎨 Plot will be saved as: results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/result_heatmap.pdf
+🔍 Looking for results in: ./results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/
+✅ Found results directly in: ./results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/
+📄 Loading configuration from: results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/output_config.json
+🎨 Plot will be saved as: results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/result_heatmap.pdf
 📊 Processing 100 data points...
 📈 Heatmap dimensions: (10, 10)
-✅ Plot saved successfully to: results/paulgraham_passkey/baseline/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/result_heatmap.pdf
+✅ Plot saved successfully to: results/paulgraham_passkey/crad/mistral-7b-instruct-v0.2/20480words_10x10x3_7digits/result_heatmap.pdf
 
 ✅ Experimento concluído!
-   Resultados em: ./results/paulgraham_passkey/baseline/.../20480words_10x10x3_7digits/
+   Resultados em: ./results/paulgraham_passkey/crad/.../20480words_10x10x3_7digits/
